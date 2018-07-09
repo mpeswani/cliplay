@@ -1,0 +1,3 @@
+include ':app', ':login2', ':pix', ':ariana'
+project(':pix').projectDir = new File('PixImagePicker/pix')
+project(':ariana').projectDir = new File('ArianaGrad/ariana')

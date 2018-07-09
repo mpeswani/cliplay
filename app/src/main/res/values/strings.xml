@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Clipay</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="roboto_regular">sans-serif</string>
+    <string name="roboto_regular_light">sans-serif-light</string>
+    <string name="roboto_regular_condensed">sans-serif-condensed</string>
+    <string name="roboto_regular_medium">sans-serif-medium</string>
+    <string name="roboto_regular_thin">sans-serif-thin</string>
+    <string name="search">Search</string>
+    <string name="more">More</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
+</resources>
