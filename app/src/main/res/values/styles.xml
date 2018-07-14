@@ -13,15 +13,15 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="itemBackground">@color/colorAccent</item>
+        <item name="itemBackground">@drawable/grad_002_night_fade</item>
         <item name="itemIconTint">@drawable/color_bottom_nav_item</item>
         <item name="itemTextColor">@drawable/color_bottom_nav_item</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.BottomNavigation.Overline</item>
         <item name="itemTextAppearanceInactive">@style/TextAppearance.BottomNavigation.Overline
         </item>
         <item name="textAllCaps">true</item>
-        <item name="paddingStart">32dp</item>
-        <item name="paddingEnd">32dp</item>
+        <item name="paddingStart">@dimen/_16sdp</item>
+        <item name="paddingEnd">@dimen/_16sdp</item>
     </style>
 
     <style name="TextAppearance.BottomNavigation.Overline" parent="TextAppearance.MaterialComponents.Overline">

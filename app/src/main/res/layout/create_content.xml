@@ -8,19 +8,19 @@
         android:id="@+id/fl_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="48dp" />
+        android:layout_marginBottom="@dimen/_46sdp" />
 
 
     <com.tbuonomo.morphbottomnavigation.MorphBottomNavigationView
         android:id="@+id/bottomNavigationView"
         style="@style/BottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/_48sdp"
         android:layout_gravity="bottom"
-        app:backgroundTint="#ff8177"
+        app:backgroundTint="#fbc2eb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_bottom_navigation"
-        app:morphCornerRadius="128dp"
-        app:morphItemRadius="64dp"
+        app:morphCornerRadius="@dimen/_128sdp"
+        app:morphItemRadius="@dimen/_30sdp"
         app:morphVerticalOffset="8dp" />
 </FrameLayout>

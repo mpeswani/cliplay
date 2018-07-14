@@ -5,20 +5,23 @@ import android.animation.ObjectAnimator;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
-import androidx.annotation.ColorRes;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTarget;
+import com.mukesh.countrypicker.CountryPicker;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.ColorRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 public class LoginActivity extends AppCompatActivity {
     protected List<ImageView> sharedElements;
@@ -27,6 +30,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        CountryPicker countryPicker =
+                new CountryPicker.Builder().with(this)
+                        .listener(country ->
+                                Toast.makeText(LoginActivity.this, country.getDialCode(), Toast
+                                        .LENGTH_SHORT)
+                                        .show()).build();
+        countryPicker.showDialog(getSupportFragmentManager());
         sharedElements = new ArrayList<>();
         ImageView logo = findViewById(R.id.logo);
         ImageView first = findViewById(R.id.first);
@@ -46,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         //load a very big image and resize it, so it fits our needs
         Glide.with(this).asBitmap()
-                .load(R.drawable.bg_login_1)
+                .load(R.drawable.table)
                 .apply(new RequestOptions().override(screenSize[0] * 2, screenSize[1]))
                 .into(new ImageViewTarget<Bitmap>(background) {
                     @Override

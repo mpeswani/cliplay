@@ -43,6 +43,8 @@ import android.widget.TextView;
 import com.transitionseverywhere.Transition;
 import com.transitionseverywhere.TransitionValues;
 
+import androidx.annotation.NonNull;
+
 /**
  * Transitions a TextView from one font size to another. This does not
  * do any animation of TextView content and if the text changes, this
@@ -394,7 +396,7 @@ public class TextSizeTransition extends Transition {
         }
 
         @Override
-        public void draw(Canvas canvas) {
+        public void draw(@NonNull Canvas canvas) {
             int saveCount = canvas.save();
             // The threshold changes depending on the target font sizes. Because scaled-up
             // fonts look bad, we want to switch when closer to the smaller font size. This

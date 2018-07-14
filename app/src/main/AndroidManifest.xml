@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="clipay.com.clipay">
 
@@ -29,6 +30,7 @@
             android:name=".ui.activity.ContentCreationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyTheme" />
-
+        <activity android:name=".ui.activity.PixEditorActivity"></activity>
     </application>
+
 </manifest>

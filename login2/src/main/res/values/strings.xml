@@ -5,6 +5,6 @@
     <string name="log_in_label">Log In</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="password_hint">Password</string>
-    <string name="email_hint">Email</string>
+    <string name="email_hint">Email or phone number</string>
     <string name="confirm_hint">Confirm Password</string>
 </resources>

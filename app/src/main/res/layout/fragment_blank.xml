@@ -13,10 +13,12 @@
         android:background="@drawable/grad_002_night_fade"
         android:fontFamily="@string/roboto_regular_medium"
         android:gravity="center"
+        android:hint="@string/what_s_up"
         android:lineSpacingExtra="@dimen/_10sdp"
         android:padding="@dimen/_16sdp"
         android:textColor="@color/white"
-        android:textSize="@dimen/_17ssp"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/_20ssp"
         tools:text="@string/hello_blank_fragment" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -25,8 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_46sdp"
         android:background="@drawable/recyclerview_color_picker_background"
         android:orientation="horizontal"
         android:padding="@dimen/_3sdp"

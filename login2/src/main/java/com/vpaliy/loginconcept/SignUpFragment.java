@@ -3,6 +3,8 @@ package com.vpaliy.loginconcept;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,7 +26,7 @@ public class SignUpFragment extends AuthFragment {
     protected List<TextInputEditText> views;
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.color_sign_up));
         views = new ArrayList<>();

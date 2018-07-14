@@ -56,7 +56,6 @@
             android:fontFamily="@string/roboto_regular_medium"
             android:gravity="center"
             android:lineSpacingExtra="@dimen/_10sdp"
-            android:padding="@dimen/_10sdp"
             android:textColor="@color/white_transparent"
             android:textSize="@dimen/_16ssp"
             tools:text="Do not mind anything that anyone tells you about anyone else. Judge everyone and everything for yourself." />
