@@ -59,7 +59,7 @@ object GradientFileParser {
     }
 
     @Throws(IOException::class, JSONException::class)
-    fun getGradientDrawables(context: Context): List<Drawable> {
+    fun getGradientDrawables(context: Context): MutableList<Drawable> {
         val gradientDrawables = ArrayList<Drawable>()
         val webGradients = getWebGradients(context)
         for (webGradient in webGradients) {

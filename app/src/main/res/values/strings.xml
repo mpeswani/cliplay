@@ -20,4 +20,11 @@
     <string name="more">More</string>
     <string name="profile">Profile</string>
     <string name="notifications">Notifications</string>
+
+    <string name="dialog_title">Insert link</string>
+    <string name="dialog_edit_hint">http(s)://</string>
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    <string name="reply">reply</string>
+
 </resources>

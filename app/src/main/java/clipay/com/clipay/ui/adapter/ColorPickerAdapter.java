@@ -23,6 +23,11 @@ public class ColorPickerAdapter extends BaseQuickAdapter<Drawable, BaseViewHolde
     }
 
     @Override
+    public Drawable getItem(int position) {
+        return mData.get(position);
+    }
+
+    @Override
     protected void convert(BaseViewHolder helper, Drawable item) {
         Glide.with(mContext).load(item).apply(RequestOptions.circleCropTransform()).into
                 ((ImageView) helper.getView(R.id.circle_colors));

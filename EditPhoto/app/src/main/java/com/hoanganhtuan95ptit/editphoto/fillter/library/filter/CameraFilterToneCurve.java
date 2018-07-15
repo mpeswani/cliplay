@@ -185,15 +185,13 @@ public class CameraFilterToneCurve extends CameraFilter {
 
         // Sort the array
         PointF[] pointsSorted = points.clone();
-        Arrays.sort(pointsSorted, new Comparator<PointF>() {
-            @Override public int compare(PointF point1, PointF point2) {
-                if (point1.x < point2.x) {
-                    return -1;
-                } else if (point1.x > point2.x) {
-                    return 1;
-                } else {
-                    return 0;
-                }
+        Arrays.sort(pointsSorted, (point1, point2) -> {
+            if (point1.x < point2.x) {
+                return -1;
+            } else if (point1.x > point2.x) {
+                return 1;
+            } else {
+                return 0;
             }
         });
 

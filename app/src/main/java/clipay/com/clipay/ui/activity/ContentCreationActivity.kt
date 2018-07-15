@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import clipay.com.clipay.R
+import clipay.com.clipay.ui.fragment.Calligraphy
 import com.blankj.utilcode.util.BarUtils
 import com.fxn.interfaces.MediaFetcher
 import com.fxn.pix.Pix
@@ -18,7 +19,7 @@ import com.hoanganhtuan95ptit.editphoto.ui.activity.EditPhotoActivity
 import kotlinx.android.synthetic.main.create_content.*
 
 
-class ContentCreationActivity : AppCompatActivity(), BlankFragment.OnFragmentInteractionListener,
+class ContentCreationActivity : AppCompatActivity(), Calligraphy.OnFragmentInteractionListener,
         Pix.OnPixFinished {
     override fun onPixChoosed(urls: MutableList<String>?) {
         EditPhotoActivity.start(this, urls?.get(0))
@@ -79,7 +80,7 @@ class ContentCreationActivity : AppCompatActivity(), BlankFragment.OnFragmentInt
                     }
                 }
                 FRAG_QUOTES -> {
-                    frag = BlankFragment.newInstance("", "")
+                    frag = Calligraphy.newInstance("", "")
                 }
                 FRAG_CAMERA -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

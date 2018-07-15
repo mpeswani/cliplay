@@ -64,11 +64,9 @@ public class CameraSurfaceView extends AutoFitGLSurfaceView
     @Override public void onPause() {
         mBackgroundHandler.removeCallbacksAndMessages(null);
         CameraController.getInstance().release();
-        queueEvent(new Runnable() {
-            @Override public void run() {
-                // 跨进程 清空 Renderer数据
-                mCameraRenderer.notifyPausing();
-            }
+        queueEvent(() -> {
+            // 跨进程 清空 Renderer数据
+            mCameraRenderer.notifyPausing();
         });
 
         super.onPause();
@@ -119,14 +117,12 @@ public class CameraSurfaceView extends AutoFitGLSurfaceView
                 final SurfaceTexture surfaceTexture = (SurfaceTexture) msg.obj;
                 surfaceTexture.setOnFrameAvailableListener(this);
 
-                mBackgroundHandler.post(new Runnable() {
-                    @Override public void run() {
-                        CameraController.getInstance()
-                                .setupCamera(surfaceTexture, getContext().getApplicationContext(),
-                                        width);
-                        mBackgroundHandler.sendMessage(mBackgroundHandler.obtainMessage(
-                                CameraSurfaceView.CameraHandler.CONFIGURE_CAMERA, width, height));
-                    }
+                mBackgroundHandler.post(() -> {
+                    CameraController.getInstance()
+                            .setupCamera(surfaceTexture, getContext().getApplicationContext(),
+                                    width);
+                    mBackgroundHandler.sendMessage(mBackgroundHandler.obtainMessage(
+                            CameraHandler.CONFIGURE_CAMERA, width, height));
                 });
             }
             break;
@@ -146,11 +142,7 @@ public class CameraSurfaceView extends AutoFitGLSurfaceView
             break;
 
             case CameraHandler.START_CAMERA_PREVIEW:
-                mBackgroundHandler.post(new Runnable() {
-                    @Override public void run() {
-                        CameraController.getInstance().startCameraPreview();
-                    }
-                });
+                mBackgroundHandler.post(() -> CameraController.getInstance().startCameraPreview());
 
                 break;
             //case CameraHandler.STOP_CAMERA_PREVIEW:

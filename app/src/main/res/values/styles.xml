@@ -13,7 +13,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="itemBackground">@drawable/grad_002_night_fade</item>
+        <item name="itemBackground">@color/white</item>
         <item name="itemIconTint">@drawable/color_bottom_nav_item</item>
         <item name="itemTextColor">@drawable/color_bottom_nav_item</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.BottomNavigation.Overline</item>
@@ -34,4 +34,16 @@
         <item name="android:textSize">@dimen/_11ssp</item>
         <item name="fontFamily">@string/roboto_regular_light</item>
     </style>
+
+    <style name="textview_comments">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="fontFamily">@string/roboto_regular_medium</item>
+        <item name="android:layout_marginStart">@dimen/_8sdp</item>
+        <item name="android:layout_below">@+id/comment_text</item>
+        <item name="android:layout_marginTop">@dimen/_8sdp</item>
+        <item name="android:textColor">@color/comment_action_text_color</item>
+    </style>
+
 </resources>

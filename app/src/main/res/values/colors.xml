@@ -3,4 +3,11 @@
     <color name="colorPrimary">#cf556c</color>
     <color name="colorPrimaryDark">#cf556c</color>
     <color name="colorAccent">#ff8177</color>
+    <color name="blue_500">#FF2196F3</color>
+    <color name="grey">#FAFAFA</color>
+    <color name="white_300">#E0E0E0</color>
+    <color name="color_name">#ED6565</color>
+    <color name="color_red">#F44336</color>
+    <color name="comment_action_text_color">#797979</color>
+
 </resources>

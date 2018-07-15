@@ -7,9 +7,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hoanganhtuan95ptit.editphoto.R;
 import com.hoanganhtuan95ptit.editphoto.model.EditType;
-import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,17 +42,12 @@ public class EditAdapter extends BaseAdapter<EditType> {
         ViewHolder viewHolder = (ViewHolder) holder;
         final EditType type = list.get(position);
 
-        Picasso.with(activity)
+        Glide.with(activity)
                 .load(type.VALUE)
                 .into(viewHolder.iv);
         viewHolder.tv.setText(type.name());
 
-        viewHolder.item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onItemEditPhotoClickedListener.onItemEditPhotoClicked(type);
-            }
-        });
+        viewHolder.item.setOnClickListener(view -> onItemEditPhotoClickedListener.onItemEditPhotoClicked(type));
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

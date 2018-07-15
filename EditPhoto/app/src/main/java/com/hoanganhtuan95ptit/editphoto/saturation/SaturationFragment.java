@@ -106,12 +106,7 @@ public class SaturationFragment extends Fragment implements View.OnClickListener
 
     private void showImage() {
         Observable.just(inputUrl)
-                .map(new Function<String, Bitmap>() {
-                    @Override
-                    public Bitmap apply(String url) throws Exception {
-                        return getBitmap(url);
-                    }
-                })
+                .map(url -> getBitmap(url))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Bitmap>() {
@@ -165,12 +160,7 @@ public class SaturationFragment extends Fragment implements View.OnClickListener
 
     private void saveImage() {
         Observable.just(inputUrl)
-                .map(new Function<String, String>() {
-                    @Override
-                    public String apply(String url) throws Exception {
-                        return saveBitmap(url);
-                    }
-                })
+                .map(url -> saveBitmap(url))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {

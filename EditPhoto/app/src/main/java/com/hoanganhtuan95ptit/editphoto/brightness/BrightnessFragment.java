@@ -22,7 +22,6 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -106,12 +105,7 @@ public class BrightnessFragment extends Fragment implements View.OnClickListener
 
     private void showImage() {
         Observable.just(inputUrl)
-                .map(new Function<String, Bitmap>() {
-                    @Override
-                    public Bitmap apply(String url) throws Exception {
-                        return getBitmap(url);
-                    }
-                })
+                .map(url -> getBitmap(url))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Bitmap>() {
@@ -165,12 +159,7 @@ public class BrightnessFragment extends Fragment implements View.OnClickListener
 
     private void saveImage() {
         Observable.just(inputUrl)
-                .map(new Function<String, String>() {
-                    @Override
-                    public String apply(String url) throws Exception {
-                        return saveBitmap(url);
-                    }
-                })
+                .map(url -> saveBitmap(url))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_8sdp"
+    android:paddingBottom="@dimen/_8sdp">
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/imageView3"
+        android:layout_width="@dimen/_48sdp"
+        android:layout_height="@dimen/_48sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/comment_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/imageView3"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_toStartOf="@+id/heart"
+        android:layout_toEndOf="@+id/imageView3"
+        android:fontFamily="@string/roboto_regular_medium"
+        android:lineSpacingExtra="@dimen/_4sdp"
+        android:textColor="@color/color_name"
+        android:textSize="@dimen/_13ssp"
+        tools:text="Kathryn Collins hello i a like this sussi b hjhjhjjhjjhhjh" />
+
+    <ImageView
+        android:id="@+id/heart"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:src="@drawable/ic_favorite_black_24dp"
+        android:tint="@color/color_red" />
+
+    <TextView
+        android:id="@+id/time"
+        style="@style/textview_comments"
+        android:layout_toEndOf="@+id/imageView3"
+        tools:text="9h" />
+
+    <TextView
+        android:id="@+id/likes"
+        style="@style/textview_comments"
+        android:layout_toEndOf="@+id/time"
+        tools:text="8.9k likes" />
+
+    <TextView
+        android:id="@+id/reply"
+        style="@style/textview_comments"
+        android:layout_toEndOf="@+id/likes"
+        android:text="@string/reply" />
+
+    <ImageView
+        android:id="@+id/more"
+        style="@style/textview_comments"
+        android:layout_toEndOf="@+id/reply"
+        android:src="@drawable/ic_more_horiz_black_24dp"
+        android:tint="@color/comment_action_text_color" />
+</RelativeLayout>

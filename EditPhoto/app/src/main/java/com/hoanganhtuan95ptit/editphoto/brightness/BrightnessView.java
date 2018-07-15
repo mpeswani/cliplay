@@ -52,20 +52,10 @@ class BrightnessView extends AppCompatImageView {
 //                    }
 //                })
                 .distinctUntilChanged()
-                .switchMap(new Function<Float, ObservableSource<ColorMatrixColorFilter>>() {
-                    @Override
-                    public ObservableSource<ColorMatrixColorFilter> apply(Float value) throws Exception {
-                        return postBrightness(value);
-                    }
-                })
+                .switchMap((Function<Float, ObservableSource<ColorMatrixColorFilter>>) value -> postBrightness(value))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ColorMatrixColorFilter>() {
-                    @Override
-                    public void accept(ColorMatrixColorFilter colorMatrixColorFilter) throws Exception {
-                        setColorFilter(colorMatrixColorFilter);
-                    }
-                });
+                .subscribe(colorMatrixColorFilter -> setColorFilter(colorMatrixColorFilter));
     }
 
     public float getBright() {

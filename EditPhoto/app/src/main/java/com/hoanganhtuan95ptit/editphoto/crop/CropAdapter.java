@@ -7,8 +7,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hoanganhtuan95ptit.editphoto.R;
-import com.squareup.picasso.Picasso;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +42,7 @@ class CropAdapter extends BaseAdapter<CropModel> {
         ViewHolder viewHolder = (ViewHolder) holder;
         final CropModel cropModel = list.get(position);
 
-        Picasso.with(activity)
+        Glide.with(activity)
                 .load(cropModel.getImg())
                 .into(viewHolder.iv);
         viewHolder.tv.setText(cropModel.getName());
@@ -52,20 +52,17 @@ class CropAdapter extends BaseAdapter<CropModel> {
         else
             viewHolder.item.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary));
 
-        viewHolder.item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        viewHolder.item.setOnClickListener(view -> {
 
-                if (position == positionSelect) return;
+            if (position == positionSelect) return;
 
-                int oldP = positionSelect;
-                positionSelect = position;
+            int oldP = positionSelect;
+            positionSelect = position;
 
-                notifyItemChanged(oldP);
-                notifyItemChanged(position);
+            notifyItemChanged(oldP);
+            notifyItemChanged(position);
 
-                onItemCropClickedListener.onItemCropClicked(cropModel.getType());
-            }
+            onItemCropClickedListener.onItemCropClicked(cropModel.getType());
         });
     }
 

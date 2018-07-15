@@ -2,25 +2,25 @@ package com.hoanganhtuan95ptit.editphoto.fillter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import androidx.appcompat.widget.AppCompatImageView;;
 import android.util.AttributeSet;
 
+import com.hoanganhtuan95ptit.editphoto.fillter.library.filter.FilterManager;
 import com.hoanganhtuan95ptit.editphoto.fillter.library.image.ImageEglSurface;
 import com.hoanganhtuan95ptit.editphoto.fillter.library.image.ImageRenderer;
-import com.hoanganhtuan95ptit.editphoto.fillter.library.filter.FilterManager;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+;
 
 /**
  * Created by Hoang Anh Tuan on 12/7/2017.
  */
 
-class FilterView extends AppCompatImageView {
+public class FilterView extends AppCompatImageView {
 
     private FilterManager.FilterType type;
     private ImageRenderer imageRenderer;
@@ -57,12 +57,7 @@ class FilterView extends AppCompatImageView {
         this.type = type;
 
         Observable.just(url)
-                .map(new Function<String, Bitmap>() {
-                    @Override
-                    public Bitmap apply(String url) throws Exception {
-                        return filterBitmap(url);
-                    }
-                })
+                .map(url1 -> filterBitmap(url1))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Bitmap>() {

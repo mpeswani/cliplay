@@ -2,8 +2,6 @@ package clipay.com.clipay.ui.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,11 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -36,7 +30,6 @@ import com.vpaliy.loginconcept.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,11 +40,6 @@ import clipay.com.clipay.R;
 import clipay.com.clipay.model.MultipleItem;
 import clipay.com.clipay.model.SMS;
 import clipay.com.clipay.ui.adapter.HomePageAdapter;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class HomePage extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
@@ -113,7 +101,9 @@ public class HomePage extends AppCompatActivity {
                 .circleCropTransform()).into(
                 (ImageView) mNavigationView.getHeaderView(0).findViewById(R.id
                         .nav_header_imageView));
-
+        homePageAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            startActivity(new Intent(this, CommentActivity.class));
+        });
     }
 
     ExoPlayer.EventListener listenr = new ExoPlayer.EventListener() {

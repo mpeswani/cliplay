@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatImageView;
  * Created by Hoang Anh Tuan on 12/6/2017.
  */
 
-class RotateView extends AppCompatImageView {
+public class RotateView extends AppCompatImageView {
 
     private int rotate;
 

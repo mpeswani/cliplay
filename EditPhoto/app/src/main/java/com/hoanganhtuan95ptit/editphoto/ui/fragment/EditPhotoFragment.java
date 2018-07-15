@@ -112,11 +112,7 @@ public class EditPhotoFragment extends Fragment implements
         this.outputUrl = outputUrl;
         Observable
                 .just(outputUrl)
-                .map(new Function<String, Bitmap>() {
-                    public Bitmap apply(String url) throws Exception {
-                        return getBitmap(url);
-                    }
-                })
+                .map(url -> getBitmap(url))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Bitmap>() {

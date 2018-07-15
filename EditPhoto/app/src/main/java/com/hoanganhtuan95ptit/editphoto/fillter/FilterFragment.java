@@ -145,12 +145,7 @@ public class FilterFragment extends Fragment implements FilterAdapter.OnItemFilt
 
     private void saveImage() {
         Observable.just(inputUrl)
-                .map(new Function<String, String>() {
-                    @Override
-                    public String apply(String url) throws Exception {
-                        return saveBitmap(url);
-                    }
-                })
+                .map(url -> saveBitmap(url))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {

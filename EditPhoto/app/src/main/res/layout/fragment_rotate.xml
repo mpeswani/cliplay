@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/controller">
 
-        <RotateView
+        <com.hoanganhtuan95ptit.editphoto.rotate.RotateView
             android:id="@+id/rotateView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
