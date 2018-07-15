@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_16sdp"
     app:cardElevation="@dimen/_3sdp">
 
     <RelativeLayout
@@ -17,8 +16,8 @@
             android:id="@+id/image"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             app:srcCompat="@drawable/circle" />
 
         <TextView
@@ -27,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/image"
             android:layout_marginStart="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_toEndOf="@+id/image"
             android:fontFamily="@string/roboto_regular_medium"
             android:textSize="@dimen/_13ssp"

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_16sdp"
     app:cardElevation="@dimen/_3sdp">
 
     <RelativeLayout
@@ -17,8 +16,8 @@
             android:id="@+id/image"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             app:srcCompat="@drawable/circle" />
 
         <TextView
@@ -27,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/image"
             android:layout_marginStart="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_toEndOf="@+id/image"
             android:fontFamily="@string/roboto_regular_medium"
             android:textSize="@dimen/_13ssp"
@@ -46,19 +45,14 @@
             android:textSize="@dimen/_11ssp"
             tools:text="9hr ago" />
 
-
         <com.google.android.exoplayer2.ui.SimpleExoPlayerView
             android:id="@+id/inner_content"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_240sdp"
             android:layout_below="@+id/image"
             android:layout_marginTop="@dimen/_18sdp"
-            android:fontFamily="@string/roboto_regular_medium"
             android:gravity="center"
-            android:lineSpacingExtra="@dimen/_10sdp"
-            android:textColor="@color/white_transparent"
-            android:textSize="@dimen/_16ssp"
-            tools:text="Do not mind anything that anyone tells you about anyone else. Judge everyone and everything for yourself." />
+            android:textColor="@color/white_transparent" />
 
         <TextView
             android:id="@+id/description"

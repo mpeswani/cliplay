@@ -60,7 +60,8 @@ class Calligraphy : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val gradients = GradientFileParser.getGradientDrawables(activity!!.applicationContext)
         gradients.add(0, ContextCompat.getDrawable(activity!!, R.drawable.ic_keyboard_arrow_right_white_24dp)!!)
-        val colorPickerAdapter = ColorPickerAdapter(gradients)
+        val arrow = arrayListOf(ContextCompat.getDrawable(activity!!, R.drawable.ic_keyboard_arrow_left_white_24dp)!!)
+        val colorPickerAdapter = ColorPickerAdapter(arrow)
         val manager = LinearLayoutManager(activity)
         manager.orientation = LinearLayout.HORIZONTAL
         color_picker_list.layoutManager = manager
@@ -72,7 +73,6 @@ class Calligraphy : Fragment() {
                         adapter.setNewData(gradients)
 //                        color_picker_list.setBackgroundResource(R.drawable.recyclerview_color_picker_background)
                     } else {
-                        val arrow = arrayListOf(ContextCompat.getDrawable(activity!!, R.drawable.ic_keyboard_arrow_left_white_24dp)!!)
 //                        color_picker_list.setBackgroundResource(R.drawable.recycler_view_side_background)
                         adapter.setNewData(arrow)
                     }

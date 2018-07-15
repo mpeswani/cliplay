@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
-    app:cardElevation="3dp">
+    app:cardElevation="@dimen/_3sdp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,10 +14,10 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             app:srcCompat="@drawable/circle" />
 
         <TextView
@@ -26,11 +25,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/image"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_toEndOf="@+id/image"
             android:fontFamily="@string/roboto_regular_medium"
-            android:textSize="14sp"
+            android:textSize="@dimen/_13ssp"
             tools:text="Kathryn Collins" />
 
         <TextView
@@ -39,11 +38,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/user_name"
             android:layout_alignBaseline="@+id/image"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_1sdp"
             android:layout_toEndOf="@+id/image"
             android:fontFamily="@string/roboto_regular_light"
-            android:textSize="12sp"
+            android:textSize="@dimen/_11ssp"
             tools:text="9hr ago" />
 
 
@@ -65,11 +64,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/inner_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@string/roboto_regular"
-            android:lineSpacingExtra="4dp"
+            android:lineSpacingExtra="@dimen/_4sdp"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/_13ssp"
             tools:text="Greyhound divisively hello coldly wonderfully marginally far upon excluding." />
 
         <ImageView
@@ -77,8 +76,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/description"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_35sdp"
             app:srcCompat="@drawable/ic_more_vert_black_24dp" />
 
 
@@ -87,11 +86,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/description"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:layout_toStartOf="@+id/ll_reply"
             android:gravity="center"
             android:orientation="vertical">
@@ -106,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/_5sdp"
                 app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
         </LinearLayout>
@@ -116,11 +113,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/description"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:layout_toStartOf="@+id/ll_share"
             android:gravity="center"
             android:orientation="vertical">
@@ -134,7 +129,7 @@
                 android:id="@+id/reply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/_5sdp"
                 app:srcCompat="@drawable/ic_reply_black_24dp" />
         </LinearLayout>
 
@@ -145,11 +140,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/description"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -162,13 +155,11 @@
                 android:id="@+id/share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/_5sdp"
                 app:srcCompat="@drawable/ic_share_black_24dp" />
 
         </LinearLayout>
 
-
     </RelativeLayout>
-
 
 </androidx.cardview.widget.CardView>

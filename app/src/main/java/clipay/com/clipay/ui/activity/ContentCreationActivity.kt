@@ -61,7 +61,11 @@ class ContentCreationActivity : AppCompatActivity(), Calligraphy.OnFragmentInter
         BarUtils.setStatusBarVisibility(this, false)
         setContentView(R.layout.create_content)
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        loadFragByTag(FRAG_CAMERA)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            loadFragByTag(FRAG_CAMERA)
+        } else {
+            loadFragByTag(FRAG_GALLERY)
+        }
     }
 
     private fun loadFragByTag(tag: String) {
