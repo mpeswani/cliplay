@@ -35,6 +35,8 @@ dependencies {
     implementation project(':ariana')
     implementation project(':phonefield')
     implementation project(':texteditor')
+    implementation project(path: ':PhotoEdit')
+    implementation project(path: ':brvahRecyclerview')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
     implementation 'com.google.android.material:material:1.0.0-beta01'
@@ -64,7 +66,6 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
@@ -79,5 +80,4 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     implementation 'com.github.QuadFlask:colorpicker:0.0.13'
-    implementation project(path: ':PhotoEdit')
 }

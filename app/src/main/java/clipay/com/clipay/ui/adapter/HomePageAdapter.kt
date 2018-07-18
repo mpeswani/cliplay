@@ -63,7 +63,7 @@ class HomePageAdapter(list: List<MultipleItem>, context: Context, player: Simple
         when (item.itemType) {
             MultipleItem.TEXT -> {
                 val tv = viewHolder.getView<TextView>(R.id.inner_content)
-                tv.background = webGradients!![viewHolder.getLayoutPosition()]
+                tv.background = webGradients!![viewHolder.layoutPosition]
                 tv.text = "Do not mind anything that anyone tells you about anyone else. Judge " + "everyone and everything for yourself."
             }
             MultipleItem.IMG -> {
