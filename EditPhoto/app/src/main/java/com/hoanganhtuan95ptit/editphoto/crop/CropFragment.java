@@ -169,16 +169,6 @@ public class CropFragment extends Fragment implements TransformImageView.Transfo
     }
 
     @Override
-    public void onBrightness(float currentBrightness) {
-
-    }
-
-    @Override
-    public void onContrast(float currentContrast) {
-
-    }
-
-    @Override
     public void onItemCropClicked(CropModel.Type type) {
         switch (type) {
             case TYPE11:

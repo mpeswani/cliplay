@@ -11,6 +11,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -18,61 +19,20 @@ import clipay.com.clipay.R
 import clipay.com.clipay.model.MultipleItem
 import clipay.com.clipay.model.SMS
 import clipay.com.clipay.ui.adapter.HomePageAdapter
+import clipay.com.clipay.util.DoubleTapImageView
+import clipay.com.clipay.views.AutoPlayVideoRecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.exoplayer2.*
-import com.google.android.exoplayer2.source.TrackGroupArray
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.trackselection.TrackSelectionArray
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.material.navigation.NavigationView
 import com.vpaliy.loginconcept.LoginActivity
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 class HomePage : AppCompatActivity() {
     private var mDrawerToggle: ActionBarDrawerToggle? = null
     private var mDrawerLayout: DrawerLayout? = null
     private var mActivityTitle: String? = null
     private var mNavigationView: NavigationView? = null
-    private var mExoPlayer: SimpleExoPlayer? = null
-    private val TAG = this.javaClass.canonicalName
-
-    private var listener: ExoPlayer.EventListener = object : ExoPlayer.EventListener {
-        override fun onTimelineChanged(timeline: Timeline?, manifest: Any?) {
-            Log.v(TAG, "Listener-onTimelineChanged...")
-        }
-
-        override fun onTracksChanged(trackGroups: TrackGroupArray, trackSelections: TrackSelectionArray) {
-            Log.v(TAG, "Listener-onTracksChanged...")
-        }
-
-        override fun onLoadingChanged(isLoading: Boolean) {
-            Log.v(TAG, "Listener-onLoadingChanged...isLoading:$isLoading")
-        }
-
-        override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-            Log.v(TAG, "Listener-onPlayerStateChanged...$playbackState")
-        }
-
-        override fun onRepeatModeChanged(repeatMode: Int) {
-            Log.v(TAG, "Listener-onRepeatModeChanged...")
-        }
-
-        override fun onPlayerError(error: ExoPlaybackException) {
-            Log.v(TAG, "Listener-onPlayerError...")
-            mExoPlayer!!.stop()
-            //            mExoPlayer.prepare(loopingSource);
-            //            mExoPlayer.setPlayWhenReady(true);
-        }
-
-        override fun onPositionDiscontinuity() {
-            Log.v(TAG, "Listener-onPositionDiscontinuity...")
-        }
-
-        override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters) {
-            Log.v(TAG, "Listener-onPlaybackParametersChanged...")
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +46,7 @@ class HomePage : AppCompatActivity() {
         supportActionBar!!.setHomeButtonEnabled(true)
         mDrawerToggle = object : ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_close) {
-             override fun onDrawerOpened(drawerView: View) {
+            override fun onDrawerOpened(drawerView: View) {
                 super.onDrawerOpened(drawerView)
                 supportActionBar!!.setTitle(R.string.app_name)
                 invalidateOptionsMenu()
@@ -98,31 +58,100 @@ class HomePage : AppCompatActivity() {
                 invalidateOptionsMenu()
             }
         }
-        val bandwidthMeter = DefaultBandwidthMeter()
-        val videoTrackSelectionFactory = AdaptiveTrackSelection.Factory(bandwidthMeter)
-        val trackSelector = DefaultTrackSelector(videoTrackSelectionFactory)
-        mExoPlayer = ExoPlayerFactory.newSimpleInstance(this, trackSelector)
-        mExoPlayer!!.addListener(listener)
         mDrawerLayout!!.addDrawerListener(mDrawerToggle!!)
         mDrawerToggle!!.isDrawerIndicatorEnabled = true
         mDrawerToggle!!.syncState()
         val list = ArrayList<MultipleItem>()
-        val size = 100
-        for (i in 0 until size) {
-            list.add(MultipleItem(i % 3, SMS()))
+        val array = arrayOf(
+                "https://images.pexels.com/photos/160699/girl-dandelion-yellow-flowers-160699.jpeg?cs=srgb&dl=beautiful-beauty-dandelion-160699.jpg&fm=jpg",
+                "https://cdn.pixabay.com/photo/2014/09/17/20/03/profile-449912_1280.jpg",
+                "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_30mb.mp4",
+                "http://mirrors.standaloneinstaller.com/video-sample/page18-movie-4.mp4",
+                "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?cs=srgb&dl=adult-attractive-beautiful-415829.jpg&fm=jpg",
+                "https://images.pexels.com/photos/805367/pexels-photo-805367.jpeg?cs=srgb&dl=accessories-adult-beautiful-805367.jpg&fm=jpg",
+                "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_30mb.mp4",
+                "https://images.pexels.com/photos/428340/pexels-photo-428340.jpeg?cs=srgb&dl=adult-dark-facial-expression-428340.jpg&fm=jpg",
+                "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_30mb.mp4",
+                "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_30mb.mp4",
+                "http://mirrors.standaloneinstaller.com/video-sample/video-sample.3gp",
+                "https://cdn.pixabay.com/photo/2015/01/07/15/51/woman-591576_1280.jpg",
+                "",
+                "http://mirrors.standaloneinstaller.com/video-sample/metaxas-keller-Bell.mov",
+                "",
+                "http://mirrors.standaloneinstaller.com/video-sample/page18-movie-4.mp4",
+                "https://cdn.pixabay.com/photo/2014/11/14/21/24/young-girl-531252_1280.jpg",
+                "https://images.pexels.com/photos/220418/pexels-photo-220418.jpeg?cs=srgb&dl=beach-beautiful-blonde-220418.jpg&fm=jpg",
+                "https://cdn.pixabay.com/photo/2017/04/03/10/42/woman-2197947_1280.jpg",
+                "http://mirrors.standaloneinstaller.com/video-sample/metaxas-keller-Bell.mpeg",
+                "http://i.imgur.com/1ALnB2s.gif",
+                "",
+                "https://cdn.pixabay.com/photo/2015/03/17/14/05/sparkler-677774_1280.jpg",
+                "https://cdn.pixabay.com/photo/2016/01/19/16/49/holding-hands-1149411_1280.jpg",
+                "",
+                "https://cdn.pixabay.com/photo/2018/01/25/14/12/nature-3106213_1280.jpg",
+                "https://www.sample-videos.com/video/mp4/360/big_buck_bunny_360p_30mb.mp4",
+                "",
+                "https://www.sample-videos.com/img/Sample-jpg-image-100kb.jpg")
+        for (i in 0 until array.size) {
+            val sms = SMS()
+            sms.id = array[i]
+            var type = MultipleItem.TEXT
+            if (sms.id.endsWith("mp4") || sms.id.endsWith("flv")) {
+                type = MultipleItem.VIDEO
+            } else if (array[i].endsWith("png") || array[i].endsWith("jpg")) {
+                type = MultipleItem.IMG
+            }
+            list.add(MultipleItem(type, sms))
         }
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val homePageAdapter = HomePageAdapter(list, this, mExoPlayer!!)
-        recyclerView.setAdapter(homePageAdapter)
-        homePageAdapter.setOnItemClickListener { adapter, view, position -> startActivity(Intent(this@HomePage, ContentCreationActivity::class.java)) }
+        val homePageAdapter = HomePageAdapter(list, this)
+        homePageAdapter.bindToRecyclerView(recyclerView)
+        recyclerView.adapter = homePageAdapter
+        homePageAdapter.setOnItemClickListener { adapter, _, position ->
+            if (adapter.getItemViewType(position) == MultipleItem.VIDEO) {
+                val rec = recyclerView as AutoPlayVideoRecyclerView
+                rec.playOrStop()
+            }
+        }
         mNavigationView!!.getHeaderView(0).setOnClickListener { view -> startActivity(Intent(this@HomePage, LoginActivity::class.java)) }
         Glide.with(this).load(HomePageAdapter.URL).apply(RequestOptions
                 .circleCropTransform()).into(
                 mNavigationView!!.getHeaderView(0).findViewById<View>(R.id
                         .nav_header_imageView) as ImageView)
-        homePageAdapter.setOnItemChildClickListener { adapter, view, position -> startActivity(Intent(this, CommentActivity::class.java)) }
+        homePageAdapter.setOnItemChildClickListener { adapter, view, position ->
+            startActivity(Intent(this, CommentActivity::class.java))
+        }
         val itemDecor = DividerItemDecoration(this, RecyclerView.VERTICAL)
         recyclerView.addItemDecoration(itemDecor)
+        fab.setOnClickListener {
+            startActivity(Intent(this@HomePage, ContentCreationActivity::class.java))
+        }
+
+        homePageAdapter.setOnDoubleTabListener(DoubleTapImageView.DoubleTapDetector {
+            val item = homePageAdapter.getItem(it) as MultipleItem
+            Glide.with(this).load(item.content.id)
+                    .apply(RequestOptions.fitCenterTransform()).transition(DrawableTransitionOptions.withCrossFade())
+                    .into(zoomed_image)
+            bigPhotoFrame.visibility = View.VISIBLE
+            appbar.visibility = View.GONE
+            zoomed_image.setScale(1.5f, true)
+            zoomed_image.minimumScale = 1.3f
+        })
+        bigPhotoFrame.setOnClickListener {
+            if (zoomed_image.isVisible) {
+                bigPhotoFrame.visibility = View.GONE
+                appbar.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        if (zoomed_image.isVisible) {
+            bigPhotoFrame.visibility = View.GONE
+            appbar.visibility = View.VISIBLE
+            return
+        }
+        super.onBackPressed()
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -148,22 +177,22 @@ class HomePage : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        mExoPlayer!!.playWhenReady = true
+        recyclerView.playWhenReady(true)
     }
 
     override fun onPause() {
         super.onPause()
-        mExoPlayer!!.playWhenReady = false
+        recyclerView.playWhenReady(false)
     }
 
     override fun onStop() {
         super.onStop()
-        mExoPlayer!!.stop()
+        recyclerView.stopPlayer()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.v(TAG, "onDestroy()...")
-        mExoPlayer!!.release()
+        Log.v("des", "onDestroy()...")
+        recyclerView.releasePlayer()
     }
 }

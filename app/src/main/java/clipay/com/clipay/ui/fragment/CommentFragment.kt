@@ -13,7 +13,7 @@ import clipay.com.clipay.R
 import clipay.com.clipay.model.Comment
 import clipay.com.clipay.ui.adapter.CommentsAdapter
 import clipay.com.clipay.ui.adapter.HomePageAdapter
-import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_comment.*
 import java.util.*
 
 
@@ -52,10 +52,10 @@ class CommentFragment : Fragment() {
         val commentsAdapter = CommentsAdapter(getComments())
         val manager = LinearLayoutManager(activity)
         manager.orientation = LinearLayout.VERTICAL
-        recyclerView.layoutManager = manager
-        recyclerView.adapter = commentsAdapter
+        recyclerViewComment.layoutManager = manager
+        recyclerViewComment.adapter = commentsAdapter
         val itemDecor = DividerItemDecoration(activity, manager.orientation)
-        recyclerView.addItemDecoration(itemDecor)
+        recyclerViewComment.addItemDecoration(itemDecor)
 
     }
 

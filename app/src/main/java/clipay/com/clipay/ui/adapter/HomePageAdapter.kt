@@ -2,42 +2,43 @@ package clipay.com.clipay.ui.adapter
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import clipay.com.clipay.R
+import clipay.com.clipay.cache.VideoCacheManager
 import clipay.com.clipay.model.MultipleItem
+import clipay.com.clipay.util.DoubleTapImageView
 import clipay.com.clipay.util.GradientFileParser
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.github.chrisbanes.photoview.PhotoView
-import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
-import com.google.android.exoplayer2.source.ExtractorMediaSource
-import com.google.android.exoplayer2.source.LoopingMediaSource
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
+import com.google.android.exoplayer2.ui.PlayerView
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import org.json.JSONException
 import java.io.IOException
 import java.util.*
 
 
-class HomePageAdapter(list: List<MultipleItem>, context: Context, player: SimpleExoPlayer) : BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder>(list) {
-    private val urls = arrayOf("https://cdn.pixabay.com/photo/2014/09/17/20/03/profile-449912_1280.jpg", "https://cdn.pixabay.com/photo/2015/01/07/15/51/woman-591576_1280.jpg", "https://cdn.pixabay.com/photo/2014/11/14/21/24/young-girl-531252_1280.jpg", "https://cdn.pixabay.com/photo/2017/04/03/10/42/woman-2197947_1280.jpg", "http://i.imgur.com/1ALnB2s.gif", "https://cdn.pixabay.com/photo/2015/03/17/14/05/sparkler-677774_1280.jpg", "https://cdn.pixabay.com/photo/2016/01/19/16/49/holding-hands-1149411_1280.jpg", "https://cdn.pixabay.com/photo/2018/01/25/14/12/nature-3106213_1280.jpg", "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_30mb.mp4")
+class HomePageAdapter(list: List<MultipleItem>, context: Context) : BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder>(list) {
     private var webGradients: List<Drawable>? = null
     private val random: Random
     private var count: Int = 0
-    private val dataSourceFactory: DefaultDataSourceFactory
-    private val player: SimpleExoPlayer
+    private val cacheManager: VideoCacheManager = VideoCacheManager.getInstance()
+    private val requestOptions: RequestOptions
+    private var detector: DoubleTapImageView.DoubleTapDetector? = null
+
+    fun setOnDoubleTabListener(detector: DoubleTapImageView.DoubleTapDetector) {
+        this.detector = detector
+    }
 
     init {
         addItemType(MultipleItem.TEXT, R.layout.main_page_cardview)
@@ -50,13 +51,8 @@ class HomePageAdapter(list: List<MultipleItem>, context: Context, player: Simple
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-
+        requestOptions = RequestOptions()
         random = Random()
-        this.player = player
-        val bandwidthMeterA = DefaultBandwidthMeter()
-        dataSourceFactory = DefaultDataSourceFactory(context,
-                Util.getUserAgent(context, "clipay"), bandwidthMeterA)
-
     }
 
     override fun convert(viewHolder: BaseViewHolder, item: MultipleItem) {
@@ -67,34 +63,52 @@ class HomePageAdapter(list: List<MultipleItem>, context: Context, player: Simple
                 tv.text = "Do not mind anything that anyone tells you about anyone else. Judge " + "everyone and everything for yourself."
             }
             MultipleItem.IMG -> {
-                val url = urls[count % 7]
+                val url = item.content.id
                 if (count == 7) {
                     count = 0
                 } else {
                     count++
                 }
                 Log.v("url", url)
+                val photo = viewHolder.getView<View>(R.id.inner_content) as DoubleTapImageView
                 Glide.with(mContext).load(url)
                         .apply(RequestOptions.overrideOf(Resources.getSystem().displayMetrics
                                 .widthPixels, mContext.resources.getDimensionPixelSize(R
                                 .dimen._240sdp)))
                         .apply(RequestOptions.centerCropTransform()).transition(DrawableTransitionOptions.withCrossFade())
-                        .into(viewHolder.getView<View>(R.id.inner_content) as PhotoView)
+                        .into(photo)
+                photo.setGestureDetector {
+                    if (this.detector != null) {
+                        this.detector!!.onDoubleTap(viewHolder.layoutPosition)
+                    }
+                }
+
             }
             MultipleItem.VIDEO -> {
-                val view = viewHolder.getView<SimpleExoPlayerView>(R.id.inner_content)
-                val mp4VideoUri = Uri.parse(urls[urls.size - 1])
-                val videoSource = ExtractorMediaSource(mp4VideoUri, dataSourceFactory, DefaultExtractorsFactory(), null, null)
-                val loopingSource = LoopingMediaSource(videoSource)
-                view.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)
-                view.player = player
-                view.useController = true
-                player.prepare(loopingSource)
-                view.useController = false
+                val view = viewHolder.getView<PlayerView>(R.id.inner_content)
+                val bar = viewHolder.getView<ProgressBar>(R.id.video_progress)
+                requestOptions.placeholder(R.drawable.no_video_img).error(R.drawable.no_video_img)
+                Glide.with(mContext)
+                        .load(item.content.id)
+                        .apply(requestOptions)
+                        .thumbnail(0.1f)
+                        .into(viewHolder.getView(R.id.inner_content_image) as ImageView)
                 view.requestFocus()
-                player.playWhenReady = true
+                Single.fromCallable {
+                    val mp4VideoUri = Uri.parse(item.content.id)
+                    val videoCache = cacheManager.get(viewHolder.layoutPosition)
+                    if (videoCache == null) {
+                        val videoCache2 = VideoCacheManager.VideoCache()
+                        videoCache2.isPlaying = false
+                        videoCache2.videoPlayPosition = 0
+                        videoCache2.videoPosition = viewHolder.layoutPosition
+                        videoCache2.uri = mp4VideoUri
+                        cacheManager.put(position = viewHolder.layoutPosition, cache = videoCache2)
+                    }
+                }.subscribeOn(Schedulers.io())
+                        .subscribe()
+                bar.indeterminateDrawable.setColorFilter(Color.WHITE, android.graphics.PorterDuff.Mode.MULTIPLY);
             }
-
         }
         viewHolder.setText(R.id.time, random.nextInt(10).toString() + "hr")
                 .setText(R.id.description, "Greyhound divisively hello coldly wonderfully " + "marginally far upon excluding.")

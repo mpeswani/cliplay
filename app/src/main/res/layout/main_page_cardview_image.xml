@@ -46,7 +46,7 @@
             tools:text="9hr ago" />
 
 
-        <com.github.chrisbanes.photoview.PhotoView
+        <clipay.com.clipay.util.DoubleTapImageView
             android:id="@+id/inner_content"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_240sdp"
@@ -55,7 +55,7 @@
             android:background="@drawable/grad_002_night_fade"
             android:fontFamily="@string/roboto_regular_medium"
             android:gravity="center"
-            android:scaleType="center"
+            android:scaleType="matrix"
             android:src="@drawable/ic_more_vert_black_24dp" />
 
         <TextView
