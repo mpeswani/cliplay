@@ -30,13 +30,10 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * Created by Hoang Anh Tuan on 11/15/2017.
  */
-
 public class CropFragment extends Fragment implements TransformImageView.TransformImageListener,
         CropAdapter.OnItemCropClickedListener,
         View.OnClickListener {
-
     private static final String INPUT_URL = "inputUrl";
-
     private UCropView ivCrop;
     private AVLoadingIndicatorView ivLoading;
     private RecyclerView list;
@@ -52,7 +49,6 @@ public class CropFragment extends Fragment implements TransformImageView.Transfo
 
     private GestureCropImageView mGestureCropImageView;
     private OverlayView mOverlayView;
-
     private OnCropListener onCropListener;
 
     private void setOnCropListener(OnCropListener onCropListener) {
@@ -61,7 +57,8 @@ public class CropFragment extends Fragment implements TransformImageView.Transfo
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_crop, container, false);
         mappingView(view);
         return view;
@@ -76,7 +73,6 @@ public class CropFragment extends Fragment implements TransformImageView.Transfo
         ImageView ivCheck = view.findViewById(R.id.ivCheck);
         LinearLayout controller = view.findViewById(R.id.controller);
         RelativeLayout rootCrop = view.findViewById(R.id.rootCrop);
-
         ivCancel.setOnClickListener(this);
         ivCheck.setOnClickListener(this);
         rootCrop.setOnClickListener(this);
@@ -91,32 +87,37 @@ public class CropFragment extends Fragment implements TransformImageView.Transfo
     private void initView() {
         CropAdapter cropAdapter = new CropAdapter(getActivity());
         cropAdapter.setOnItemCropClickedListener(this);
-        list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager
+                .HORIZONTAL, false));
         list.setAdapter(cropAdapter);
         new StartSnapHelper().attachToRecyclerView(list);
-
-        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop11_selected, "1:1", CropModel.Type.TYPE11));
-        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop23_selected, "2:3", CropModel.Type.TYPE23));
-        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop32_selected, "3:2", CropModel.Type.TYPE32));
-        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop43_selected, "4:3", CropModel.Type.TYPE43));
-        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop34_selected, "3:4", CropModel.Type.TYPE34));
-        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop169_selected, "16:9", CropModel.Type.TYPE169));
-        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop916_selected, "9:16", CropModel.Type.TYPE916));
-
+        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop11_selected, "1:1",
+                CropModel.Type.TYPE11));
+        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop23_selected, "2:3",
+                CropModel.Type.TYPE23));
+        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop32_selected, "3:2",
+                CropModel.Type.TYPE32));
+        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop43_selected, "4:3",
+                CropModel.Type.TYPE43));
+        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop34_selected, "3:4",
+                CropModel.Type.TYPE34));
+        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop169_selected, "16:9",
+                CropModel.Type.TYPE169));
+        cropAdapter.add(new CropModel(R.drawable.pg_sdk_edit_crop_crop916_selected, "9:16",
+                CropModel.Type.TYPE916));
         mGestureCropImageView = ivCrop.getCropImageView();
         mOverlayView = ivCrop.getOverlayView();
-
         mGestureCropImageView.setScaleEnabled(true);
         mGestureCropImageView.setRotateEnabled(true);
         mGestureCropImageView.setImageToWrapCropBounds(true);
         mGestureCropImageView.setTransformImageListener(this);
-
         try {
             if (getArguments() != null) {
                 showLoading();
                 String inputUrl = getArguments().getString(INPUT_URL);
                 assert inputUrl != null;
-                mGestureCropImageView.setImageUri(Uri.fromFile(new File(inputUrl)), Uri.fromFile(new File(inputUrl)));
+                mGestureCropImageView.setImageUri(Uri.fromFile(new File(inputUrl)), Uri.fromFile
+                        (new File(inputUrl)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,10 +126,11 @@ public class CropFragment extends Fragment implements TransformImageView.Transfo
 
     private void saveImage() {
         showLoading();
-        mGestureCropImageView.cropAndSaveImage(Bitmap.CompressFormat.PNG, 100, new BitmapCropCallback() {
-
+        mGestureCropImageView.cropAndSaveImage(Bitmap.CompressFormat.PNG, 100, new
+                BitmapCropCallback() {
             @Override
-            public void onBitmapCropped(@NonNull Uri resultUri, int offsetX, int offsetY, int imageWidth, int imageHeight) {
+            public void onBitmapCropped(@NonNull Uri resultUri, int offsetX, int offsetY, int
+                    imageWidth, int imageHeight) {
                 if (onCropListener != null)
                     onCropListener.onCropPhotoCompleted(resultUri.getPath());
                 back();
@@ -146,7 +148,6 @@ public class CropFragment extends Fragment implements TransformImageView.Transfo
         getActivity().onBackPressed();
     }
 
-
     @Override
     public void onLoadComplete() {
         hideLoading();
@@ -155,17 +156,14 @@ public class CropFragment extends Fragment implements TransformImageView.Transfo
 
     @Override
     public void onLoadFailure(@NonNull Exception e) {
-
     }
 
     @Override
     public void onRotate(float currentAngle) {
-
     }
 
     @Override
     public void onScale(float currentScale) {
-
     }
 
     @Override

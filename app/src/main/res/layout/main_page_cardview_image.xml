@@ -98,12 +98,16 @@
                 style="@style/textview_options"
                 tools:text="99.0k" />
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/favourite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:lottie_autoPlay="false"
+                app:lottie_loop="false"
                 app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
         </LinearLayout>

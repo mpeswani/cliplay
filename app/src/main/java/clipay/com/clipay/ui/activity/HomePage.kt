@@ -16,11 +16,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import clipay.com.clipay.R
+import clipay.com.clipay.license.showLicesnse
 import clipay.com.clipay.model.MultipleItem
 import clipay.com.clipay.model.SMS
 import clipay.com.clipay.ui.adapter.HomePageAdapter
+import clipay.com.clipay.ui.fragment.BottomSheetFragment
 import clipay.com.clipay.util.DoubleTapImageView
 import clipay.com.clipay.views.AutoPlayVideoRecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
@@ -28,7 +31,17 @@ import com.google.android.material.navigation.NavigationView
 import com.vpaliy.loginconcept.LoginActivity
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class HomePage : AppCompatActivity() {
+class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    override fun onNavigationItemSelected(p0: MenuItem): Boolean {
+        when (p0.itemId) {
+            R.id.nav_item_about -> {
+                showLicesnse(this)
+            }
+        }
+
+        return true
+    }
+
     private var mDrawerToggle: ActionBarDrawerToggle? = null
     private var mDrawerLayout: DrawerLayout? = null
     private var mActivityTitle: String? = null
@@ -118,8 +131,24 @@ class HomePage : AppCompatActivity() {
                 .circleCropTransform()).into(
                 mNavigationView!!.getHeaderView(0).findViewById<View>(R.id
                         .nav_header_imageView) as ImageView)
+        mNavigationView!!.setNavigationItemSelectedListener(this)
         homePageAdapter.setOnItemChildClickListener { adapter, view, position ->
-            startActivity(Intent(this, CommentActivity::class.java))
+            when (view.id) {
+                R.id.reply -> {
+                    startActivity(Intent(this, CommentActivity::class.java))
+                }
+                R.id.more -> {
+                    val bottomSheetFragment = BottomSheetFragment()
+                    bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+                }
+
+                R.id.favourite -> {
+                    val animationView = view as LottieAnimationView
+                    animationView.setAnimation(R.raw.animation_heart1)
+                    animationView.playAnimation()
+                }
+
+            }
         }
         val itemDecor = DividerItemDecoration(this, RecyclerView.VERTICAL)
         recyclerView.addItemDecoration(itemDecor)
@@ -141,14 +170,16 @@ class HomePage : AppCompatActivity() {
             if (zoomed_image.isVisible) {
                 bigPhotoFrame.visibility = View.GONE
                 appbar.visibility = View.VISIBLE
+                fab.visibility = View.GONE
             }
         }
     }
 
     override fun onBackPressed() {
-        if (zoomed_image.isVisible) {
+        if (bigPhotoFrame.isVisible) {
             bigPhotoFrame.visibility = View.GONE
             appbar.visibility = View.VISIBLE
+            fab.visibility = View.VISIBLE
             return
         }
         super.onBackPressed()

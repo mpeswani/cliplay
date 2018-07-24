@@ -117,6 +117,8 @@ class HomePageAdapter(list: List<MultipleItem>, context: Context) : BaseMultiIte
                 .setText(R.id.share_count, "50k")
                 .setText(R.id.user_name, "Kathryn Collins")
                 .addOnClickListener(R.id.reply)
+                .addOnClickListener(R.id.more)
+                .addOnClickListener(R.id.favourite)
         Glide.with(mContext).load(URL).apply(RequestOptions.circleCropTransform())
                 .into(viewHolder.getView<View>(R.id.image) as ImageView)
     }

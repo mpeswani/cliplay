@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/controller">
 
-        <BrightnessView
+        <com.hoanganhtuan95ptit.editphoto.brightness.BrightnessView
             android:id="@+id/brightnessView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

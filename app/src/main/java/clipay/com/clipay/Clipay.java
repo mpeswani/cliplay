@@ -15,6 +15,7 @@
  */
 package clipay.com.clipay;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.exoplayer2.BuildConfig;
 import com.google.android.exoplayer2.offline.DownloadAction.Deserializer;
 import com.google.android.exoplayer2.offline.DownloadManager;
@@ -41,6 +42,7 @@ import java.io.File;
 
 import androidx.multidex.MultiDexApplication;
 import clipay.com.clipay.exo.DownloadTracker;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Placeholder application to facilitate overriding Application methods for debugging and testing.
@@ -66,6 +68,7 @@ public class Clipay extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         userAgent = Util.getUserAgent(this, "ExoPlayerDemo");
     }
 

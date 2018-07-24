@@ -19,7 +19,7 @@ import java.util.*
  */
 object GradientFileParser {
     @Throws(IOException::class, JSONException::class)
-    fun getWebGradients(context: Context): List<WebGradient> {
+    private fun getWebGradients(context: Context): List<WebGradient> {
         val inputStream = context.assets.open("grad.txt")
         val jsonArray = JSONObject(convertStreamToString(inputStream))
         val webGradients = ArrayList<WebGradient>()

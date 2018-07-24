@@ -12,7 +12,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
@@ -22,7 +21,7 @@ import io.reactivex.subjects.PublishSubject;
  * Created by Hoang Anh Tuan on 12/12/2017.
  */
 
-class BrightnessView extends AppCompatImageView {
+public class BrightnessView extends AppCompatImageView {
 
     private float bright;
     private PublishSubject<Float> subject;
