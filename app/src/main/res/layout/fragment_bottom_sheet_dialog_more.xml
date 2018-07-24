@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_16sdp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/copyLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_content_copy_black_24dp"
+        android:drawablePadding="@dimen/_16sdp"
+        android:padding="@dimen/_12sdp"
+        android:text="Copy Link" />
+
+
+    <TextView
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_save_black_24dp"
+        android:drawablePadding="@dimen/_16sdp"
+        android:padding="@dimen/_12sdp"
+        android:text="Save" />
+
+
+    <TextView
+        android:id="@+id/help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_help_black_24dp"
+        android:drawablePadding="@dimen/_16sdp"
+        android:padding="@dimen/_12sdp"
+        android:text="Help" />
+
+    <TextView
+        android:id="@+id/feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_feedback_black_24dp"
+        android:drawablePadding="@dimen/_16sdp"
+        android:padding="@dimen/_12sdp"
+        android:text="Feedback" />
+
+
+</LinearLayout>
