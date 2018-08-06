@@ -3,7 +3,6 @@
     android:id="@+id/item"
     android:layout_width="120dp"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp">

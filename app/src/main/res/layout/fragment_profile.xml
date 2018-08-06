@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/htab_maincontent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerImages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_60sdp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_250sdp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="@dimen/_150sdp"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <RelativeLayout
+            android:id="@+id/vie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_minus16sdp"
+            android:background="@drawable/black_gradient"
+            android:paddingStart="@dimen/_16sdp"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_36sdp">
+
+            <LinearLayout
+                android:id="@+id/followersClick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/followers_count"
+                    style="@style/textview_follows"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:text="200"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/followers"
+                    style="@style/textview_follows"
+                    android:text="followers" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/postsClick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/posts_count"
+                    style="@style/textview_follows"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:text="300"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/posts"
+                    style="@style/textview_follows"
+                    android:text="posts" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/followingClick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/following_count"
+                    style="@style/textview_follows"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:text="300"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/following"
+                    style="@style/textview_follows"
+                    android:text="following" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <include
+            layout="@layout/user_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/vie"
+            android:layout_marginBottom="@dimen/_minus16sdp" />
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

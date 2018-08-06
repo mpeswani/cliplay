@@ -36,7 +36,6 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -112,7 +111,7 @@ public class EditPhotoFragment extends Fragment implements
         this.outputUrl = outputUrl;
         Observable
                 .just(outputUrl)
-                .map(url -> getBitmap(url))
+                .map(this::getBitmap)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Bitmap>() {
@@ -122,6 +121,7 @@ public class EditPhotoFragment extends Fragment implements
 
                     public void onNext(Bitmap bitmap) {
                         ivPhotoView.setImageBitmap(bitmap);
+
                     }
 
                     public void onError(Throwable e) {

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EditPhoto</string>
+    <string name="edit_photo">Edit Photo</string>
+    <string name="brightness">Brightness</string>
 </resources>

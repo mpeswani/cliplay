@@ -1,9 +1,11 @@
 package clipay.com.clipay.ui.activity
 
+import android.animation.Animator
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,6 +13,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -23,13 +26,14 @@ import clipay.com.clipay.ui.adapter.HomePageAdapter
 import clipay.com.clipay.ui.fragment.BottomSheetFragment
 import clipay.com.clipay.util.DoubleTapImageView
 import clipay.com.clipay.views.AutoPlayVideoRecyclerView
-import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieComposition
+import com.airbnb.lottie.LottieDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.navigation.NavigationView
-import com.vpaliy.loginconcept.LoginActivity
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.main_page.*
 
 class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -38,14 +42,13 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                 showLicesnse(this)
             }
         }
-
         return true
     }
 
-    private var mDrawerToggle: ActionBarDrawerToggle? = null
-    private var mDrawerLayout: DrawerLayout? = null
+    private lateinit var mDrawerToggle: ActionBarDrawerToggle
+    private lateinit var mDrawerLayout: DrawerLayout
     private var mActivityTitle: String? = null
-    private var mNavigationView: NavigationView? = null
+    private lateinit var mNavigationView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,13 +70,13 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
             override fun onDrawerClosed(view: View) {
                 super.onDrawerClosed(view)
-                supportActionBar!!.setTitle(mActivityTitle)
+                supportActionBar!!.title = mActivityTitle
                 invalidateOptionsMenu()
             }
         }
-        mDrawerLayout!!.addDrawerListener(mDrawerToggle!!)
-        mDrawerToggle!!.isDrawerIndicatorEnabled = true
-        mDrawerToggle!!.syncState()
+        mDrawerLayout.addDrawerListener(mDrawerToggle)
+        mDrawerToggle.isDrawerIndicatorEnabled = true
+        mDrawerToggle.syncState()
         val list = ArrayList<MultipleItem>()
         val array = arrayOf(
                 "https://images.pexels.com/photos/160699/girl-dandelion-yellow-flowers-160699.jpeg?cs=srgb&dl=beautiful-beauty-dandelion-160699.jpg&fm=jpg",
@@ -126,12 +129,15 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                 rec.playOrStop()
             }
         }
-        mNavigationView!!.getHeaderView(0).setOnClickListener { view -> startActivity(Intent(this@HomePage, LoginActivity::class.java)) }
+        mNavigationView.getHeaderView(0).setOnClickListener { view ->
+            startActivity(Intent(this@HomePage, ProfileActivity::class.java))
+            drawer_layout.closeDrawers()
+        }
         Glide.with(this).load(HomePageAdapter.URL).apply(RequestOptions
                 .circleCropTransform()).into(
-                mNavigationView!!.getHeaderView(0).findViewById<View>(R.id
+                mNavigationView.getHeaderView(0).findViewById<View>(R.id
                         .nav_header_imageView) as ImageView)
-        mNavigationView!!.setNavigationItemSelectedListener(this)
+        mNavigationView.setNavigationItemSelectedListener(this)
         homePageAdapter.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
                 R.id.reply -> {
@@ -143,11 +149,41 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                 }
 
                 R.id.favourite -> {
-                    val animationView = view as LottieAnimationView
-                    animationView.setAnimation(R.raw.animation_heart1)
-                    animationView.playAnimation()
-                }
+                    bigPhotoFrame.visibility = View.VISIBLE
+                    val view1 = LottieDrawable()
+                    val inputStream = resources.openRawResource(R.raw.animation_heart)
+                    val x = LottieComposition.Factory.fromInputStreamSync(inputStream)
+                    view1.composition = x
+                    zoomed_image.setImageDrawable(view1)
+                    view1.playAnimation()
+                    view1.addAnimatorListener(object : Animator.AnimatorListener {
+                        override fun onAnimationRepeat(p0: Animator?) {
+                        }
 
+                        override fun onAnimationEnd(p0: Animator?) {
+                            bigPhotoFrame.visibility = View.GONE
+                        }
+
+                        override fun onAnimationCancel(p0: Animator?) {
+                        }
+
+                        override fun onAnimationStart(p0: Animator?) {
+                        }
+
+                    })
+                }
+                R.id.share -> {
+                    val sendIntent = Intent()
+                    sendIntent.action = Intent.ACTION_SEND
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Clipay best social networking app")
+                    sendIntent.type = "text/plain"
+                    startActivity(sendIntent)
+                }
+                R.id.image, R.id.user_name -> {
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, getString(R.string.transition))
+                    startActivity(intent, options.toBundle())
+                }
             }
         }
         val itemDecor = DividerItemDecoration(this, RecyclerView.VERTICAL)
@@ -165,12 +201,12 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             appbar.visibility = View.GONE
             zoomed_image.setScale(1.5f, true)
             zoomed_image.minimumScale = 1.3f
+            fab.hide()
         })
         bigPhotoFrame.setOnClickListener {
             if (zoomed_image.isVisible) {
                 bigPhotoFrame.visibility = View.GONE
                 appbar.visibility = View.VISIBLE
-                fab.visibility = View.GONE
             }
         }
     }
@@ -179,7 +215,11 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         if (bigPhotoFrame.isVisible) {
             bigPhotoFrame.visibility = View.GONE
             appbar.visibility = View.VISIBLE
-            fab.visibility = View.VISIBLE
+            fab.show()
+            return
+        }
+        if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+            mDrawerLayout.closeDrawer(Gravity.START)
             return
         }
         super.onBackPressed()
@@ -187,12 +227,12 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        mDrawerToggle!!.syncState()
+        mDrawerToggle.syncState()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        mDrawerToggle!!.onConfigurationChanged(newConfig)
+        mDrawerToggle.onConfigurationChanged(newConfig)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -201,7 +241,7 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (mDrawerToggle!!.onOptionsItemSelected(item)) {
+        return if (mDrawerToggle.onOptionsItemSelected(item)) {
             true
         } else super.onOptionsItemSelected(item)
     }

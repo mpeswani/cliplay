@@ -2,6 +2,9 @@ package com.vpaliy.loginconcept;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -11,14 +14,19 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTarget;
+import com.bumptech.glide.request.target.Target;
 import com.mukesh.countrypicker.CountryPicker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -29,6 +37,17 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences preferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        if (preferences.getBoolean("login", false)) {
+            try {
+                startActivity(new Intent(this, Class.forName("clipay.com.clipay.ui" +
+                        ".activity.HomePage")));
+                finish();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
         setContentView(R.layout.activity_login);
         CountryPicker countryPicker =
                 new CountryPicker.Builder().with(this)
@@ -58,9 +77,16 @@ public class LoginActivity extends AppCompatActivity {
         Glide.with(this).asBitmap()
                 .load(R.drawable.table)
                 .apply(new RequestOptions().override(screenSize[0] * 2, screenSize[1]))
-                .into(new ImageViewTarget<Bitmap>(background) {
+                .listener(new RequestListener<Bitmap>() {
                     @Override
-                    protected void setResource(Bitmap resource) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model,
+                                                Target<Bitmap> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap>
+                            target, DataSource dataSource, boolean isFirstResource) {
                         background.setImageBitmap(resource);
                         background.post(() -> {
                             //we need to scroll to the very left edge of the image
@@ -80,8 +106,24 @@ public class LoginActivity extends AppCompatActivity {
                                     pager, background, sharedElements);
                             pager.setAdapter(adapter);
                         });
+                        return true;
+                    }
+                })
+                .into(new ImageViewTarget<Bitmap>(background) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
                     }
                 });
+        findViewById(R.id.first).setOnClickListener(view -> {
+            try {
+                preferences.edit().putBoolean("login", true).apply();
+                startActivity(new Intent(this, Class.forName("clipay.com.clipay.ui" +
+                        ".activity.HomePage")));
+                finish();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private int[] screenSize() {

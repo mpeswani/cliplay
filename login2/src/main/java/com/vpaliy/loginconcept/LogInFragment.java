@@ -26,7 +26,7 @@ import androidx.core.content.ContextCompat;
 
 public class LogInFragment extends AuthFragment {
     //    @BindViews(value = {R.id.email_input_edit, R.id.password_input_edit})
-    protected List<TextInputEditText> views;
+    private List<TextInputEditText> views;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

@@ -106,4 +106,8 @@ dependencies {
     }
     implementation 'com.github.marcoscgdev:Licenser:1.0.2'
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation 'br.com.simplepass:loading-button-android:1.14.0'
+}
+configurations.all() {
+    resolutionStrategy.force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

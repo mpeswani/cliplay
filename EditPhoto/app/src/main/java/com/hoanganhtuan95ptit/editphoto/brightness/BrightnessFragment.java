@@ -76,7 +76,6 @@ public class BrightnessFragment extends Fragment implements View.OnClickListener
         ImageView ivCancel = view.findViewById(R.id.ivCancel);
         TextView tvTitle = view.findViewById(R.id.tvTitle);
         ImageView ivCheck = view.findViewById(R.id.ivCheck);
-        LinearLayout controller = view.findViewById(R.id.controller);
         RelativeLayout rootBrightness = view.findViewById(R.id.rootBrightness);
 
         ivCancel.setOnClickListener(this);

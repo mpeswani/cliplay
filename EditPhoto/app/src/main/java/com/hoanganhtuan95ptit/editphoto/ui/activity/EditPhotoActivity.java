@@ -17,11 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 /**
  * Created by Hoang Anh Tuan on 12/14/2017.
  */
-
 public class EditPhotoActivity extends BaseActivity {
-
     private static final String INPUT_URL = "inputUrl";
-
 
     public static void start(Context context, String inputUrl) {
         Intent starter = new Intent(context, EditPhotoActivity.class);
@@ -33,7 +30,8 @@ public class EditPhotoActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager
+                .LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_edit_photo);
         addFragment(EditPhotoFragment.create(getIntent().getStringExtra(INPUT_URL)));
     }
@@ -48,6 +46,9 @@ public class EditPhotoActivity extends BaseActivity {
     public void addFragmentToStack(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
+        for (Fragment fragment1 : manager.getFragments()) {
+            ft.hide(fragment1);
+        }
         ft.add(R.id.rootMain, fragment);
         ft.addToBackStack(null);
         ft.commit();

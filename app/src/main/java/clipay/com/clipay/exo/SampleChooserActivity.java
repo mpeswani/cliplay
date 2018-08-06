@@ -103,9 +103,9 @@
 //    // action. Starting it in the background throws an exception if the app is in the background too
 //    // (e.g. if device screen is locked).
 //    try {
-//      DownloadService.start(this, DemoDownloadService.class);
+//      DownloadService.start(this, VideoDownloadService.class);
 //    } catch (IllegalStateException e) {
-//      DownloadService.startForeground(this, DemoDownloadService.class);
+//      DownloadService.startForeground(this, VideoDownloadService.class);
 //    }
 //  }
 //

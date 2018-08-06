@@ -29,13 +29,13 @@ import clipay.com.clipay.Clipay;
 import clipay.com.clipay.R;
 
 /** A service for downloading media. */
-public class DemoDownloadService extends DownloadService {
+public class VideoDownloadService extends DownloadService {
 
   private static final String CHANNEL_ID = "download_channel";
   private static final int JOB_ID = 1;
   private static final int FOREGROUND_NOTIFICATION_ID = 1;
 
-  public DemoDownloadService() {
+  public VideoDownloadService() {
     super(
         FOREGROUND_NOTIFICATION_ID,
         DEFAULT_FOREGROUND_NOTIFICATION_UPDATE_INTERVAL,

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,7 +23,6 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -71,7 +69,6 @@ public class FilterFragment extends Fragment implements FilterAdapter.OnItemFilt
         ImageView ivCancel = view.findViewById(R.id.ivCancel);
         TextView tvTitle = view.findViewById(R.id.tvTitle);
         ImageView ivCheck = view.findViewById(R.id.ivCheck);
-        LinearLayout controller = view.findViewById(R.id.controller);
         RelativeLayout rootFilter = view.findViewById(R.id.rootFilter);
 
         ivCancel.setOnClickListener(this);

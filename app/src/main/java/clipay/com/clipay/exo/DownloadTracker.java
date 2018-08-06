@@ -205,7 +205,7 @@ public class DownloadTracker implements DownloadManager.Listener {
   }
 
   private void startServiceWithAction(DownloadAction action) {
-    DownloadService.startWithAction(context, DemoDownloadService.class, action, false);
+    DownloadService.startWithAction(context, VideoDownloadService.class, action, false);
   }
 
   private DownloadHelper getDownloadHelper(Uri uri, String extension) {

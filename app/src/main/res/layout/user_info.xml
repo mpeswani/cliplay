@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewProfile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/f5f5f5"
+    app:cardCornerRadius="@dimen/_16sdp">
+
+    <RelativeLayout
+        android:id="@+id/userInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:fontFamily="@string/roboto_regular_medium"
+            android:text="Kathryn Collins"
+            android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_name"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:fontFamily="@string/roboto_regular_light"
+            android:text="Mumbai, India"
+            android:textSize="@dimen/_11ssp" />
+
+        <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+            android:id="@+id/follow"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:background="@drawable/circular_border_shape"
+            android:text="Follow"
+            android:textColor="@color/colorPrimaryLight"
+            app:spinning_bar_color="@color/colorPrimaryLight"
+            app:spinning_bar_padding="6dp"
+            app:spinning_bar_width="4dp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/time"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:autoLink="all"
+            android:fontFamily="@string/roboto_regular"
+            android:lineSpacingExtra="@dimen/_4sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            tools:text="@string/temp_desc" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

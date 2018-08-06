@@ -22,7 +22,6 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -77,7 +76,6 @@ public class SaturationFragment extends Fragment implements View.OnClickListener
         ImageView ivCancel = view.findViewById(R.id.ivCancel);
         TextView tvTitle = view.findViewById(R.id.tvTitle);
         ImageView ivCheck = view.findViewById(R.id.ivCheck);
-        LinearLayout controller = view.findViewById(R.id.controller);
         RelativeLayout rootBrightness = view.findViewById(R.id.rootBrightness);
 
         ivCancel.setOnClickListener(this);

@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rootMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/ivCancel"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:src="@drawable/nav_cancel"
+            android:tint="@color/colorAccent" />
+
+        <ImageView
+            android:id="@+id/ivCheck"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:src="@drawable/nav_check"
+            android:tint="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/edit_photo"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rootMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header" />
 </RelativeLayout>

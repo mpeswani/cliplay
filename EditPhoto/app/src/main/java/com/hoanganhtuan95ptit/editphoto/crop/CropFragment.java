@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -71,7 +70,6 @@ public class CropFragment extends Fragment implements TransformImageView.Transfo
         ImageView ivCancel = view.findViewById(R.id.ivCancel);
         TextView tvTitle = view.findViewById(R.id.tvTitle);
         ImageView ivCheck = view.findViewById(R.id.ivCheck);
-        LinearLayout controller = view.findViewById(R.id.controller);
         RelativeLayout rootCrop = view.findViewById(R.id.rootCrop);
         ivCancel.setOnClickListener(this);
         ivCheck.setOnClickListener(this);

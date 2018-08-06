@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import clipay.com.clipay.R
 import clipay.com.clipay.cache.VideoCacheManager
 import clipay.com.clipay.model.MultipleItem
@@ -35,7 +36,7 @@ class HomePageAdapter(list: List<MultipleItem>, context: Context) : BaseMultiIte
     private val cacheManager: VideoCacheManager = VideoCacheManager.getInstance()
     private val requestOptions: RequestOptions
     private var detector: DoubleTapImageView.DoubleTapDetector? = null
-
+    private val circularProgressDrawable: CircularProgressDrawable
     fun setOnDoubleTabListener(detector: DoubleTapImageView.DoubleTapDetector) {
         this.detector = detector
     }
@@ -53,6 +54,10 @@ class HomePageAdapter(list: List<MultipleItem>, context: Context) : BaseMultiIte
         }
         requestOptions = RequestOptions()
         random = Random()
+        circularProgressDrawable = CircularProgressDrawable(context)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
     }
 
     override fun convert(viewHolder: BaseViewHolder, item: MultipleItem) {
@@ -75,7 +80,8 @@ class HomePageAdapter(list: List<MultipleItem>, context: Context) : BaseMultiIte
                         .apply(RequestOptions.overrideOf(Resources.getSystem().displayMetrics
                                 .widthPixels, mContext.resources.getDimensionPixelSize(R
                                 .dimen._240sdp)))
-                        .apply(RequestOptions.centerCropTransform()).transition(DrawableTransitionOptions.withCrossFade())
+                        .apply(RequestOptions.centerCropTransform().placeholder(circularProgressDrawable))
+                        .transition(DrawableTransitionOptions.withCrossFade())
                         .into(photo)
                 photo.setGestureDetector {
                     if (this.detector != null) {
@@ -119,6 +125,9 @@ class HomePageAdapter(list: List<MultipleItem>, context: Context) : BaseMultiIte
                 .addOnClickListener(R.id.reply)
                 .addOnClickListener(R.id.more)
                 .addOnClickListener(R.id.favourite)
+                .addOnClickListener(R.id.share)
+                .addOnClickListener(R.id.image)
+                .addOnClickListener(R.id.user_name)
         Glide.with(mContext).load(URL).apply(RequestOptions.circleCropTransform())
                 .into(viewHolder.getView<View>(R.id.image) as ImageView)
     }

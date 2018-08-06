@@ -23,7 +23,6 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -39,12 +38,6 @@ public class ContrastFragment extends Fragment implements View.OnClickListener, 
     private TextView tvProcess;
     private LinearLayout llProcess;
     private TwoLineSeekBar seekBar;
-    private ImageView ivCancel;
-    private TextView tvTitle;
-    private ImageView ivCheck;
-    private LinearLayout controller;
-    private RelativeLayout rootBrightness;
-
     private String inputUrl;
     private boolean start = true;
 
@@ -81,11 +74,10 @@ public class ContrastFragment extends Fragment implements View.OnClickListener, 
         tvProcess = view.findViewById(R.id.tvProcess);
         llProcess = view.findViewById(R.id.llProcess);
         seekBar = view.findViewById(R.id.seekBar);
-        ivCancel = view.findViewById(R.id.ivCancel);
-        tvTitle = view.findViewById(R.id.tvTitle);
-        ivCheck = view.findViewById(R.id.ivCheck);
-        controller = view.findViewById(R.id.controller);
-        rootBrightness = view.findViewById(R.id.rootBrightness);
+        ImageView ivCancel = view.findViewById(R.id.ivCancel);
+        TextView tvTitle = view.findViewById(R.id.tvTitle);
+        ImageView ivCheck = view.findViewById(R.id.ivCheck);
+        RelativeLayout rootBrightness = view.findViewById(R.id.rootBrightness);
 
         ivCancel.setOnClickListener(this);
         ivCheck.setOnClickListener(this);
