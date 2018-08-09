@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.Calligraphy">
 
-    <com.clipay.texteditor.KnifeText
+    <EditText
         android:id="@+id/edit_query"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,16 +19,10 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white_300"
         android:textSize="@dimen/_20ssp"
-        app:bulletColor="@color/blue_500"
-        app:bulletGapWidth="@dimen/bullet_gap_width"
-        app:bulletRadius="@dimen/bullet_radius"
-        app:historyEnable="true"
-        app:historySize="99"
-        app:linkColor="@color/blue_500"
-        app:linkUnderline="true"
-        app:quoteCapWidth="@dimen/quote_gap_width"
-        app:quoteColor="@color/blue_500"
-        app:quoteStripeWidth="@dimen/quote_stripe_width"
+        app:autoSizeMaxTextSize="40sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
+        app:autoSizeTextType="uniform"
         tools:text="@string/hello_blank_fragment" />
 
     <androidx.recyclerview.widget.RecyclerView

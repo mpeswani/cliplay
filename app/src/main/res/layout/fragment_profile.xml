@@ -18,7 +18,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         app:behavior_hideable="false"
-        app:behavior_peekHeight="@dimen/_150sdp"
+        app:behavior_peekHeight="@dimen/_190sdp"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
         <RelativeLayout

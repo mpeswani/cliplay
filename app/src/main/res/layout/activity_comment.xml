@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/recyclerView"
-        class="clipay.com.clipay.ui.fragment.CommentFragment"
+        class="cliplay.com.cliplay.ui.fragment.CommentFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/appbar"

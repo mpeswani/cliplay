@@ -7,4 +7,9 @@
     <string name="password_hint">Password</string>
     <string name="email_hint">Email or phone number</string>
     <string name="confirm_hint">Confirm Password</string>
+    <string name="try_again">Try again</string>
+    <string name="verify_email">A verification mail has been sent to your email id. Please verify the email.</string>
+    <string name="web_client_id">523270422934-b0vdu35l6q83r0ftvunf104294uir7an.apps.googleusercontent.com</string>
+    <string name="enter_valid_email">Please enter valid email id</string>
+
 </resources>

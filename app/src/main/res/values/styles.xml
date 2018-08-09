@@ -56,4 +56,46 @@
         <item name="android:textColor">@color/white_300</item>
     </style>
 
+    <style name="textview_username">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/_8sdp</item>
+        <item name="android:layout_marginStart">@dimen/_14sdp</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
+        <item name="fontFamily">@string/roboto_regular_medium</item>
+    </style>
+
+    <style name="textview_description">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/_8sdp</item>
+        <item name="android:layout_marginStart">@dimen/_16sdp</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="fontFamily">@string/roboto_regular</item>
+        <item name="android:lineSpacingExtra">@dimen/_2sdp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ImageView_avatar">
+        <item name="android:layout_width">@dimen/_40sdp</item>
+        <item name="android:layout_height">@dimen/_40sdp</item>
+        <item name="android:layout_marginStart">@dimen/_16sdp</item>
+        <item name="android:layout_marginTop">@dimen/_8sdp</item>
+        <item name="android:src">@drawable/circle</item>
+    </style>
+
+    <style name="inner_content">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/_290sdp</item>
+        <item name="android:layout_below">@+id/image</item>
+        <item name="android:layout_marginTop">@dimen/_8sdp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="margin_buttons">
+        <item name="android:layout_marginStart">@dimen/_12sdp</item>
+        <item name="android:layout_marginTop">@dimen/_8sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_12sdp</item>
+    </style>
+
 </resources>

@@ -6,8 +6,11 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -25,7 +28,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 public class LogInFragment extends AuthFragment {
-    //    @BindViews(value = {R.id.email_input_edit, R.id.password_input_edit})
     private List<TextInputEditText> views;
 
     @Override
@@ -37,9 +39,10 @@ public class LogInFragment extends AuthFragment {
         views.add(view.findViewById(R.id.email_input_edit));
         views.add(view.findViewById(R.id.password_input_edit));
         view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.color_log_in));
+        final TextInputLayout inputLayout = view.findViewById(R.id.password_input);
+        final TextInputLayout emailInput = view.findViewById(R.id.email_input);
         for (TextInputEditText editText : views) {
             if (editText.getId() == R.id.password_input_edit) {
-                final TextInputLayout inputLayout = view.findViewById(R.id.password_input);
                 Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
                 inputLayout.setTypeface(boldTypeface);
                 editText.addTextChangedListener(new TextWatcherAdapter() {
@@ -55,6 +58,20 @@ public class LogInFragment extends AuthFragment {
                     editText.setSelected(isEnabled);
                 }
             });
+        }
+        EditText editText = inputLayout.getEditText();
+        if (editText != null) {
+            editText.setOnEditorActionListener((v, actionId, event) -> {
+                if (actionId == EditorInfo.IME_ACTION_DONE && validateInput(emailInput, inputLayout)) {
+                    login(emailInput.getEditText().getText().toString(),
+                            inputLayout.getEditText().getText().toString());
+                }
+                return false;
+            });
+        }
+        EditText email = emailInput.getEditText();
+        if (email != null && !TextUtils.isEmpty(getActivity().getIntent().getStringExtra("email"))) {
+            email.setText(getActivity().getIntent().getStringExtra("email"));
         }
     }
 

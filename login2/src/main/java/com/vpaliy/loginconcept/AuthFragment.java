@@ -1,33 +1,70 @@
 package com.vpaliy.loginconcept;
 
+import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.core.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.transitionseverywhere.ChangeBounds;
 import com.transitionseverywhere.TransitionManager;
 import com.transitionseverywhere.TransitionSet;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 public abstract class AuthFragment extends Fragment {
     protected Callback callback;
     protected VerticalTextView caption;
     protected ViewGroup parent;
     protected boolean lock;
+    private UserLoginWithEmail mUserLoginWithEmail;
 
+    interface UserLoginWithEmail {
+        void onLogin(String email, String password, boolean login);
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        mUserLoginWithEmail = (UserLoginWithEmail) context;
+        super.onAttach(context);
+    }
+
+    public void login(String userName, String password) {
+        mUserLoginWithEmail.onLogin(userName, password, authLayout() == R.layout.login_fragment);
+    }
+
+    protected boolean validateInput(TextInputLayout email, TextInputLayout password) {
+        EditText mail = email.getEditText();
+        EditText pass = password.getEditText();
+        if (mail == null || email.getEditText().length() == 0) {
+            Toast.makeText(getActivity(), "Please enter the correct email id", Toast
+                    .LENGTH_SHORT).show();
+            return false;
+        } else if (!EUtil.validate(mail.getText().toString())) {
+            Toast.makeText(getActivity(), R.string.enter_valid_email, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (pass == null || password.getEditText().length() < 6) {
+            Toast.makeText(getActivity(), "Please enter the password minimum 6 characters", Toast
+                    .LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     @Nullable

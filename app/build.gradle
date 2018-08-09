@@ -8,6 +8,8 @@ apply plugin: 'com.getkeepsafe.dexcount'
 
 apply plugin: 'io.fabric'
 
+apply plugin: 'com.google.gms.google-services'
+
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
@@ -24,7 +26,7 @@ android {
     compileSdkVersion project.ext.myCompileSdkVersion
     buildToolsVersion project.ext.myBuildToolsVersion
     defaultConfig {
-        applicationId "clipay.com.clipay"
+        applicationId "com.cliplay"
         minSdkVersion project.ext.myMinSdkVersion
         targetSdkVersion project.ext.myTargetSdkVersion
         versionCode 1
@@ -65,17 +67,15 @@ dependencies {
     //    implementation 'com.google.firebase:firebase-messaging:17.1.0'
     //    implementation 'com.google.firebase:firebase-storage:16.0.1'
     //    implementation "com.google.firebase:firebase-invites:16.0.0"
-    //    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
     //    implementation 'com.google.firebase:firebase-firestore:17.0.2'
-    //    implementation 'com.google.firebase:firebase-core:16.0.1'
-    //    implementation 'com.google.firebase:firebase-auth:16.0.2'
-    //    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+
     //    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
     testImplementation 'junit:junit:4.12'
-    //    implementation 'com.facebook.android:facebook-login:4.33.0'
+
     //    implementation 'com.facebook.android:facebook-share:4.31.0'
     implementation 'com.blankj:utilcode:1.15.1'
-    //    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
     //    implementation 'com.twitter.sdk.android:tweet-composer:3.1.1'
     //    implementation 'com.google.android.gms:play-services-plus:15.0.1'
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
@@ -93,7 +93,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0-beta01'
     implementation 'com.tbuonomo:morph-bottom-navigation:1.0.1'
     implementation 'com.github.chrisbanes:PhotoView:2.1.4'
-    implementation 'androidx.palette:palette-ktx:1.0.0-beta01'
+    implementation 'androidx.palette:palette-ktx:1.0.0-rc01'
     implementation 'ja.burhanrashid52:photoeditor:0.2.1'
     implementation 'com.google.android.exoplayer:exoplayer:2.8.2'
     implementation 'com.github.mukeshsolanki:photofilter:1.0.3'
@@ -107,6 +107,10 @@ dependencies {
     implementation 'com.github.marcoscgdev:Licenser:1.0.2'
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
     implementation 'br.com.simplepass:loading-button-android:1.14.0'
+    implementation "com.squareup.retrofit2:retrofit:2.3.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
+    implementation("com.squareup.okhttp3:okhttp:3.8.1")
 }
 configurations.all() {
     resolutionStrategy.force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

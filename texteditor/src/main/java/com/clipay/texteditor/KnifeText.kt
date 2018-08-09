@@ -23,11 +23,11 @@ import android.text.*
 import android.text.style.*
 import android.util.AttributeSet
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatEditText
 import java.util.*
 
-open class KnifeText : EditText, TextWatcher {
+open class KnifeText : AppCompatEditText, TextWatcher {
 
     private var bulletColor = 0
     private var bulletRadius = 0
@@ -60,7 +60,7 @@ open class KnifeText : EditText, TextWatcher {
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr) {
         init(attrs)
     }
 

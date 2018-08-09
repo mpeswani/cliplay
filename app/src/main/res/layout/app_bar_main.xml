@@ -25,7 +25,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <clipay.com.clipay.views.AutoPlayVideoRecyclerView
+    <com.cliplay.views.AutoPlayVideoRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,7 +44,7 @@
         android:layout_margin="@dimen/_24sdp"
         app:backgroundTintMode="multiply"
         app:borderWidth="0dp"
-        app:layout_behavior="clipay.com.clipay.util.ScrollingFABBehavior"
+        app:layout_behavior="com.cliplay.util.ScrollingFABBehavior"
         app:srcCompat="@drawable/ic_add_white_24dp" />
 
     <FrameLayout

@@ -48,7 +48,7 @@ class FilterAdapter extends BaseAdapter<FilterModel> {
         if (position == positionSelect)
             viewHolder.item.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorSelect));
         else
-            viewHolder.item.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+            viewHolder.item.setBackgroundColor(ContextCompat.getColor(activity, R.color.white));
 
         viewHolder.item.setOnClickListener(view -> {
 

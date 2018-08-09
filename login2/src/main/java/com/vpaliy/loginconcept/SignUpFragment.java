@@ -3,17 +3,17 @@ package com.vpaliy.loginconcept;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.core.content.ContextCompat;
 import android.text.Editable;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.transitionseverywhere.ChangeBounds;
 import com.transitionseverywhere.Transition;
 import com.transitionseverywhere.TransitionManager;
@@ -21,6 +21,11 @@ import com.transitionseverywhere.TransitionSet;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 public class SignUpFragment extends AuthFragment {
     protected List<TextInputEditText> views;
@@ -34,11 +39,14 @@ public class SignUpFragment extends AuthFragment {
         views.add(view.findViewById(R.id.password_input_edit));
         views.add(view.findViewById(R.id.confirm_password_edit));
         caption.setText(getString(R.string.sign_up_label));
+
+        final TextInputLayout emailLayout = view.findViewById(R.id.email_input);
+        final TextInputLayout inputLayout = view.findViewById(R.id.password_input);
+        final TextInputLayout confirmLayout = view.findViewById(R.id.confirm_password);
         for (TextInputEditText editText : views) {
             if (editText.getId() == R.id.password_input_edit) {
-                final TextInputLayout inputLayout = view.findViewById(R.id.password_input);
-                final TextInputLayout confirmLayout = view.findViewById(R.id.confirm_password);
                 Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
+                emailLayout.setTypeface(boldTypeface);
                 inputLayout.setTypeface(boldTypeface);
                 confirmLayout.setTypeface(boldTypeface);
                 editText.addTextChangedListener(new TextWatcherAdapter() {
@@ -58,6 +66,22 @@ public class SignUpFragment extends AuthFragment {
         caption.setVerticalText(true);
         foldStuff();
         caption.setTranslationX(getTextPadding());
+
+        EditText editText = confirmLayout.getEditText();
+        EditText pass = inputLayout.getEditText();
+        if (editText != null && pass != null) {
+            editText.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
+                if (!editText.getText().toString().equals(pass.getText().toString())) {
+                    Toast.makeText(getActivity(), "Confirm password does not match", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                if (actionId == EditorInfo.IME_ACTION_DONE && validateInput(emailLayout, confirmLayout)) {
+                    login(emailLayout.getEditText().getText().toString(),
+                            confirmLayout.getEditText().getText().toString());
+                }
+                return false;
+            });
+        }
     }
 
     @Override
