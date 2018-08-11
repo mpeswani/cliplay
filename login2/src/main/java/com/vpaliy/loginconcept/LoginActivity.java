@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -43,6 +45,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.TwitterAuthProvider;
+import com.mukesh.countrypicker.Country;
 import com.mukesh.countrypicker.CountryPicker;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -56,6 +59,7 @@ import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
@@ -93,13 +97,22 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient
             return;
         }
         setContentView(R.layout.activity_login);
-        CountryPicker countryPicker =
-                new CountryPicker.Builder().with(this)
-                        .listener(country ->
-                                Toast.makeText(LoginActivity.this, country.getDialCode(), Toast
-                                        .LENGTH_SHORT)
-                                        .show()).build();
-        countryPicker.showDialog(getSupportFragmentManager());
+        String countryCode = getUserCountry(this);
+        if (TextUtils.isEmpty(countryCode)) {
+            CountryPicker countryPicker =
+                    new CountryPicker.Builder().with(this)
+                            .listener(country ->
+                                    Toast.makeText(LoginActivity.this, country.getDialCode(), Toast
+                                            .LENGTH_SHORT)
+                                            .show())
+                            .build();
+            countryPicker.showDialog(getSupportFragmentManager());
+        } else {
+            CountryPicker countryPicker =
+                    new CountryPicker.Builder().with(this).build();
+            Country country = countryPicker.getCountryByISO(countryCode);
+            Toast.makeText(this, country.getCode(), Toast.LENGTH_SHORT).show();
+        }
         sharedElements = new ArrayList<>();
         ImageView logo = findViewById(R.id.logo);
         ImageView first = findViewById(R.id.first);
@@ -385,6 +398,29 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient
                 mAuth.signOut();
             }
         }
+    }
+
+    public static String getUserCountry(Context context) {
+        try {
+            final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context
+                    .TELEPHONY_SERVICE);
+            if (tm == null) {
+                return "";
+            }
+            final String simCountry = tm.getSimCountryIso();
+            if (simCountry != null && simCountry.length() == 2) { // SIM country code is available
+                return simCountry.toLowerCase(Locale.US);
+            } else if (tm.getPhoneType() != TelephonyManager.PHONE_TYPE_CDMA) { // device is not
+                // 3G (would be unreliable)
+                String networkCountry = tm.getNetworkCountryIso();
+                if (networkCountry != null && networkCountry.length() == 2) { // network country
+                    // code is available
+                    return networkCountry.toLowerCase(Locale.US);
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return "";
     }
 
     @Override

@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">LoginConcept</string>
 
+    <string name="app_name">LoginConcept</string>
     <string name="sign_up_label">Sign Up</string>
     <string name="log_in_label">Log In</string>
     <string name="forgot_password">Forgot Password?</string>
@@ -9,7 +9,8 @@
     <string name="confirm_hint">Confirm Password</string>
     <string name="try_again">Try again</string>
     <string name="verify_email">A verification mail has been sent to your email id. Please verify the email.</string>
-    <string name="web_client_id">523270422934-b0vdu35l6q83r0ftvunf104294uir7an.apps.googleusercontent.com</string>
+    <string name="web_client_id">1024369514016-c4is3logqdqcrqk7ijvegor0pva8a473.apps.googleusercontent.com</string>
     <string name="enter_valid_email">Please enter valid email id</string>
+    <string name="facebook_app_id">453038035200894</string>
 
 </resources>

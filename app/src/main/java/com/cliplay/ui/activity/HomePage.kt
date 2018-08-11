@@ -18,7 +18,6 @@ import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-
 import com.airbnb.lottie.LottieComposition
 import com.airbnb.lottie.LottieDrawable
 import com.bumptech.glide.Glide
@@ -33,6 +32,8 @@ import com.cliplay.ui.fragment.BottomSheetFragment
 import com.cliplay.util.DoubleTapDetector
 import com.cliplay.views.AutoPlayVideoRecyclerView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.main_page.*
 import java.util.*
@@ -54,6 +55,7 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        x()
         setContentView(R.layout.main_page)
         mDrawerLayout = findViewById(R.id.drawer_layout)
         mNavigationView = findViewById(R.id.nav_view)
@@ -179,7 +181,7 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                 R.id.share -> {
                     val sendIntent = Intent()
                     sendIntent.action = Intent.ACTION_SEND
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Clipay best social networking app")
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Cliplay best social networking app")
                     sendIntent.type = "text/plain"
                     startActivity(sendIntent)
                 }
@@ -252,7 +254,18 @@ class HomePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
     override fun onResume() {
         super.onResume()
+        setProfilePic()
         recyclerView.playWhenReady(true)
+    }
+
+    private fun setProfilePic() {
+        val firebaseAuth = FirebaseAuth.getInstance() ?: return
+        var mFirebaseUser: FirebaseUser? = firebaseAuth.currentUser ?: return
+        Glide.with(this)
+                .load(mFirebaseUser!!.photoUrl)
+                .apply(RequestOptions().placeholder(R.drawable.circle).centerCrop().circleCrop())
+                .into(mNavigationView.getHeaderView(0).findViewById(R.id
+                        .nav_header_imageView))
     }
 
     override fun onPause() {

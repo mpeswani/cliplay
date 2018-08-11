@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseViewHolder
 import com.chad.library.adapter.base.VideoHolder
-import com.cliplay.Clipay
+import com.cliplay.Cliplay
 import com.cliplay.R
 import com.cliplay.cache.VideoCacheManager
 import com.cliplay.model.MultipleItem
@@ -249,7 +249,7 @@ class AutoPlayVideoRecyclerView : RecyclerView {
     }
 
     private fun buildDataSourceFactory(useBandwidthMeter: Boolean): DataSource.Factory {
-        return (context.applicationContext as Clipay)
+        return (context.applicationContext as Cliplay)
                 .buildDataSourceFactory(if (useBandwidthMeter) BANDWIDTH_METER else null)
     }
 
@@ -380,7 +380,7 @@ class AutoPlayVideoRecyclerView : RecyclerView {
     }
 
     private fun getOfflineStreamKeys(uri: Uri): List<*> {
-        return (context.applicationContext as Clipay).downloadTracker.getOfflineStreamKeys<Any>(uri)
+        return (context.applicationContext as Cliplay).getDownloadTracker()!!.getOfflineStreamKeys<Any>(uri)
     }
 
     private fun getPercentViewHolderInScreen(viewHolder: VideoHolder?): Float {

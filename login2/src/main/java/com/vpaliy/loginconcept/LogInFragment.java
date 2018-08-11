@@ -62,7 +62,8 @@ public class LogInFragment extends AuthFragment {
         EditText editText = inputLayout.getEditText();
         if (editText != null) {
             editText.setOnEditorActionListener((v, actionId, event) -> {
-                if (actionId == EditorInfo.IME_ACTION_DONE && validateInput(emailInput, inputLayout)) {
+                if (actionId == EditorInfo.IME_ACTION_DONE && validateInput(emailInput,
+                        inputLayout)) {
                     login(emailInput.getEditText().getText().toString(),
                             inputLayout.getEditText().getText().toString());
                 }
@@ -70,10 +71,31 @@ public class LogInFragment extends AuthFragment {
             });
         }
         EditText email = emailInput.getEditText();
-        if (email != null && !TextUtils.isEmpty(getActivity().getIntent().getStringExtra("email"))) {
+        if (email != null && !TextUtils.isEmpty(getActivity().getIntent().getStringExtra("email")
+        )) {
             email.setText(getActivity().getIntent().getStringExtra("email"));
         }
+//        float px = convertDpToPixel(24);
+//        Glide.with(getActivity()).asDrawable()
+//                .load(R.drawable.flag_in)
+//                .apply(new RequestOptions().override((int) px, (int) px))
+//                .into(new SimpleTarget<Drawable>() {
+//                    @Override
+//                    public void onResourceReady(@NonNull Drawable resource, @Nullable com
+//                            .bumptech.glide.request.transition.Transition<? super Drawable>
+//                            transition) {
+////                        resource.setAlpha(128);
+//                        views.get(0).setCompoundDrawablesRelativeWithIntrinsicBounds(resource,
+//                                null, null, null);
+//                    }
+//                });
     }
+
+//    public static float convertDpToPixel(float dp) {
+//        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+//        float px = dp * ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+//        return px;
+//    }
 
     @Override
     public int authLayout() {

@@ -1,4 +1,4 @@
-include ':app', ':login2', ':pix', ':ariana', ':VideoCam', ':phonefield', ':PhotoEdit', ':texteditor', ':brvahRecyclerview'
+include ':app', ':login2', ':pix', ':ariana', ':VideoCam', ':phonefield', ':PhotoEdit', ':texteditor', ':brvahRecyclerview', ':cliplaynetworking'
 project(':pix').projectDir = new File('PixImagePicker/pix')
 project(':ariana').projectDir = new File('ArianaGrad/ariana')
 project(':PhotoEdit').projectDir = new File('EditPhoto/app')

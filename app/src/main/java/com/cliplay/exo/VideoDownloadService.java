@@ -17,7 +17,7 @@ package com.cliplay.exo;
 
 import android.app.Notification;
 
-import com.cliplay.Clipay;
+import com.cliplay.Cliplay;
 import com.cliplay.R;
 import com.google.android.exoplayer2.offline.DownloadManager;
 import com.google.android.exoplayer2.offline.DownloadManager.TaskState;
@@ -45,7 +45,7 @@ public class VideoDownloadService extends DownloadService {
 
   @Override
   protected DownloadManager getDownloadManager() {
-    return ((Clipay) getApplication()).getDownloadManager();
+    return ((Cliplay) getApplication()).getDownloadManager();
   }
 
   @Override
