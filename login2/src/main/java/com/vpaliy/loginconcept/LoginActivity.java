@@ -264,7 +264,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
+                if (account != null) {
+                    firebaseAuthWithGoogle(account);
+                }
             } else {
                 updateUI(null);
             }

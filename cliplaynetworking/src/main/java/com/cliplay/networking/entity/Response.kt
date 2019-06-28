@@ -5,4 +5,4 @@ package com.cliplay.networking.entity
  * copyright (c) crafty endeavours
  * manoharpeswani@outlook.com
  */
-data class Response(val statusCode: Int, val message: String, val fail: String)
+data class Response(val statusCode: Int, val message: String)

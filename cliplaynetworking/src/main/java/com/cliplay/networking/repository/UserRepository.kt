@@ -2,6 +2,7 @@ package com.cliplay.networking.repository
 
 import com.cliplay.networking.entity.Response
 import com.cliplay.networking.entity.User
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -14,9 +15,9 @@ import io.reactivex.Single
 
 interface UserRepository {
 
-    fun loaduserById(id: String): Single<User>
+    fun getUserById(id: String): Maybe<User>
 
-    fun loadUserToFollow(currentUserId: String): Observable<List<User>>
+    fun getUserToFollow(currentUserId: String): Observable<List<User>>
 
     fun createUser(user: User): Response
 

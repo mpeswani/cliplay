@@ -1,18 +1,27 @@
 package com.cliplay.networking
 
-import com.cliplay.networking.entity.Response
-import com.cliplay.networking.entity.User
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
+import com.cliplay.networking.database.AppDatabase
+import com.cliplay.networking.database.UserDao
 import com.cliplay.networking.presenter.UserPresenter
-import com.cliplay.networking.services.NetworkService
-import com.cliplay.networking.views.BaseView
+import com.cliplay.networking.repository.UserRepository
+import com.cliplay.networking.repository.dbrepository.DBUserRepository
 import com.cliplay.networking.views.UserView
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
+
+
+
+
 
 
 /**
@@ -20,28 +29,39 @@ import org.mockito.junit.MockitoJUnit
  *
  * @see [Testing documentation](http://d.android.com/tools/testing)
  */
+@RunWith(AndroidJUnit4::class)
 class ExampleUnitTest {
-
+    private var mUserDao: UserDao? = null
+    private var mDb: AppDatabase? = null
     @get:Rule
-    var rule = MockitoJUnit.rule()
-    @Mock
-    lateinit var service: NetworkService
+    var rule = MockitoJUnit.rule()!!
 
     @Mock
     lateinit var userView: UserView
+
+    @Mock
+    lateinit var networkRepo: UserRepository
+
+    lateinit var dbRepo: UserRepository
 
     @InjectMocks
     lateinit var userService: UserPresenter
 
 
     @Before
-    fun before() {
-
+    fun setup() {
+        MockitoAnnotations.initMocks(this)
+        val context = InstrumentationRegistry.getTargetContext()
+        mDb = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
+        mUserDao = mDb!!.userDao
+        dbRepo = DBUserRepository(mUserDao!!)
     }
 
     @Test
     fun emptyTest() {
-        userService.getUser("5b374c12a35c3a1a0e7d5dcc")
+
+//        Mockito.`when`(userService.getUser("5b374c12a35c3a1a0e7d5dcc")).thenReturn(us)
+
     }
 
 
@@ -52,27 +72,7 @@ class ExampleUnitTest {
 
     @Test
     fun testUser() {
-        UserPresenter(object : UserView {
-            override fun gotUser(user: User) {
-                assertEquals("Mr. Ana McKenzie", user.name)
-            }
-
-            override fun gotUserToFollow(users: List<User>) {
-            }
-
-            override fun gotUserCreated(users: Response) {
-            }
-
-            override fun gotUserEdited(users: Response) {
-            }
-
-            override fun loading(loading: Boolean) {
-                assertEquals(true, loading)
-            }
-
-            override fun onError(view: BaseView, response: Response) {
-            }
-        }).getUser("5b374c12a35c3a1a0e7d5dcc")
+        userService.getUser("5b374c12a35c3a1a0e7d5dcc")
     }
 
 }

@@ -45,7 +45,7 @@ class Cliplay : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         Fabric.with(this, Crashlytics())
-        CliplayNetworking.init()
+        CliplayNetworking.init(this)
         userAgent = Util.getUserAgent(this, "ExoPlayerDemo")
     }
 

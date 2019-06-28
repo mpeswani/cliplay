@@ -1,5 +1,6 @@
 package com.cliplay.networking.presenter
 
+import com.cliplay.networking.views.UserView
 import io.reactivex.disposables.CompositeDisposable
 
 
@@ -11,4 +12,12 @@ import io.reactivex.disposables.CompositeDisposable
 
 open class BasePresenter {
     protected val disposable: CompositeDisposable = CompositeDisposable()
+
+    fun showProgress(userView: UserView?) {
+        userView?.loading(true)
+    }
+
+    fun hideProgress(userView: UserView?) {
+        userView?.loading(false)
+    }
 }

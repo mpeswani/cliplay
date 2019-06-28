@@ -11,7 +11,7 @@
         android:layout_marginBottom="@dimen/_46sdp" />
 
 
-    <com.tbuonomo.morphbottomnavigation.MorphBottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         style="@style/BottomNavigationView"
         android:layout_width="match_parent"
@@ -20,8 +20,5 @@
         app:backgroundTint="@color/white"
         app:labelVisibilityMode="auto"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_bottom_navigation"
-        app:morphCornerRadius="@dimen/_50sdp"
-        app:morphItemRadius="@dimen/_10sdp"
-        app:morphVerticalOffset="6dp" />
+        app:menu="@menu/menu_bottom_navigation" />
 </FrameLayout>
